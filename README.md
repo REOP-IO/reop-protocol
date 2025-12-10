@@ -6,19 +6,19 @@ REOP is an open-source, vendor-neutral standard for structuring, exchanging, and
 
 ## 🚀 Vision: The Golden Record
 
-[cite_start]Real estate data today is trapped in PDFs, ad-hoc feeds, and unstructured websites[cite: 4]. [cite_start]REOP is the solution, defining **what** data is exchanged and **how** it evolves over time[cite: 5].
+Real estate data today is trapped in PDFs, ad-hoc feeds, and unstructured websites. REOP is the solution, defining **what** data is exchanged and **how** it evolves over time.
 
-[cite_start]Our goal is simple: **Don't be invisible to the future.** The data must be ready for autonomous AI agents and modern digital platforms[cite: 79].
+Our goal is simple: **Don't be invisible to the future.** The data must be ready for autonomous AI agents and modern digital platforms.
 
 ## 🛠️ Protocol Structure
 
-[cite_start]The REOP protocol models the real estate domain as a flexible hierarchy[cite: 22]:
+The REOP protocol models the real estate domain as a flexible hierarchy:
 
 `Developer` → `Project` → `Building` → `Floor` → `UnitModel` → `Unit`
 
-### [cite_start]Key Features of the Protocol [cite: 10, 11, 29]
+### Key Features of the Protocol 
 
-* [cite_start]**Decoupled Inventory:** Supports both the high-level **Unit Model** (Type A) and the granular **Unit** (Specific Inventory), allowing projects to be listed even if availability is limited[cite: 26, 27].
+* **Decoupled Inventory:** Supports both the high-level **Unit Model** (Type A) and the granular **Unit** (Specific Inventory), allowing projects to be listed even if availability is limited.
 * **Inheritance & Overrides:** Data defined at a higher level (e.g., Project Amenities) propagates downward to children, minimizing payload size and redundancy.
 * **AI-Ready Fields:** Includes necessary fields for semantic matching, such as `orientation`, `legalInfo` (Escrow/Bank), and multilingual descriptions (`he`/`en`).
 * **Delta-Friendly:** Supports partial updates for rapid changes in pricing and availability.
@@ -36,7 +36,7 @@ You can find the definitive protocol files here:
 
 ## 🤝 Community & Contribution
 
-[cite_start]REOP is an open protocol[cite: 7]. [cite_start]We welcome feedback, bug reports, and proposals for new fields (e.g., for Commercial Real Estate in `vNext` [cite: 51]).
+REOP is an open protocol. We welcome feedback, bug reports, and proposals for new fields (e.g., for Commercial Real Estate in `vNext`).
 
 * **Discussions:** Got a question? Want to suggest an improvement? Head over to the **Discussions** tab.
 * **Bugs:** Report issues or errors in the existing specification via **Issues**.
