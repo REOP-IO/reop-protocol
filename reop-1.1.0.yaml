@@ -1,0 +1,250 @@
+openapi: 3.1.0
+info:
+  title: The Real Estate Open Protocol (REOP)
+  version: 1.1.0
+  description: |
+    The comprehensive standard for Global Real Estate Development.
+    Features:
+    - Decoupled Inventory (Types vs. Units)
+    - Multi-language Support
+    - Marketing & Legal Compliance Layers
+    - Starting Price fallback logic
+
+servers:
+  - url: https://api.reop.io/v1
+
+paths:
+  /ingest/developer:
+    post:
+      summary: Upload Full Developer Catalog
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/DeveloperCatalog' }
+      responses:
+        '202': { description: "Processing" }
+
+components:
+  schemas:
+    # --- ROOT ---
+    DeveloperCatalog:
+      type: object
+      properties:
+        protocol: { type: object, properties: { version: { type: string } } }
+        developer: { $ref: '#/components/schemas/Developer' }
+
+    # --- ENTITIES ---
+    Developer:
+      type: object
+      required: [id, name]
+      properties:
+        id: { type: string }
+        name: { type: string }
+        description: { $ref: '#/components/schemas/LocalizedString' }
+        companyDetails:
+          type: object
+          properties:
+            legalName: { type: string }
+            companyId: { type: string }
+            vatId: { type: string }
+        history:
+          type: object
+          properties:
+            yearsExperience: { type: integer }
+            projectsDelivered: { type: integer }
+            unitsSold: { type: integer }
+        contact: { $ref: '#/components/schemas/ContactInfo' }
+        marketing: { $ref: '#/components/schemas/MarketingInfo' }
+        projects: 
+          type: array
+          items: { $ref: '#/components/schemas/Project' }
+
+    Project:
+      type: object
+      required: [id, name, location, status]
+      properties:
+        id: { type: string }
+        name: { type: string }
+        description: { $ref: '#/components/schemas/LocalizedString' }
+        type: { type: string, enum: [luxury, investment, mixedUse, affordable] }
+        status: { $ref: '#/components/schemas/ProjectStatus' }
+        location: { $ref: '#/components/schemas/Location' }
+        marketing: { $ref: '#/components/schemas/MarketingInfo' }
+        paymentPlan: { $ref: '#/components/schemas/PaymentPlan' }
+        legal: { $ref: '#/components/schemas/LegalInfo' }
+        interests: { $ref: '#/components/schemas/Interests' }
+        amenities: { $ref: '#/components/schemas/Amenities' }
+        
+        # 1. TYPES (The Catalog)
+        unitModels:
+          type: array
+          items: { $ref: '#/components/schemas/UnitModel' }
+        
+        # 2. STRUCTURE (The Map)
+        buildings:
+          type: array
+          items: { $ref: '#/components/schemas/Building' }
+        
+        # 3. STOCK (The Inventory)
+        inventory:
+          type: array
+          items: { $ref: '#/components/schemas/Unit' }
+
+    Building:
+      type: object
+      required: [id, name]
+      properties:
+        id: { type: string }
+        name: { type: string }
+        description: { $ref: '#/components/schemas/LocalizedString' }
+        numberOfFloors: { type: integer }
+        numberOfElevators: { type: integer }
+        marketing: { $ref: '#/components/schemas/MarketingInfo' }
+        floors:
+          type: array
+          items: { $ref: '#/components/schemas/Floor' }
+
+    Floor:
+      type: object
+      required: [number]
+      properties:
+        id: { type: string }
+        number: { type: integer }
+        name: { type: string }
+        marketing: { $ref: '#/components/schemas/MarketingInfo' }
+
+    UnitModel:
+      type: object
+      required: [id, name, specs]
+      properties:
+        id: { type: string }
+        name: { type: string }
+        description: { $ref: '#/components/schemas/LocalizedString' }
+        specs:
+          type: object
+          properties:
+            bedrooms: { type: number }
+            bathrooms: { type: number }
+            interiorAreaSqm: { type: number }
+            balconyAreaSqm: { type: number }
+            gardenAreaSqm: { type: number }
+        marketing: { $ref: '#/components/schemas/MarketingInfo' }
+
+    Unit:
+      type: object
+      required: [id, unitNumber, status, links]
+      properties:
+        id: { type: string }
+        unitNumber: { type: string }
+        status: { type: string, enum: [available, reserved, sold, notForSale] }
+        price: { $ref: '#/components/schemas/Money' }
+        startingPrice: { $ref: '#/components/schemas/Money' }
+        links:
+          type: object
+          required: [modelId]
+          properties:
+            modelId: { type: string }
+            buildingId: { type: string }
+            floorId: { type: string }
+        features:
+          type: object
+          properties:
+            orientation: { type: array, items: { type: string } }
+            view: { type: string }
+            tags: { type: array, items: { type: string } }
+
+    # --- SHARED ---
+    MarketingInfo:
+      type: object
+      properties:
+        startingPrice: { $ref: '#/components/schemas/Money' }
+        heroImage: { type: string, format: uri }
+        logo: { type: object }
+        website: { type: string, format: uri }
+        projectUrl: { type: string, format: uri }
+        brochurePdf: { type: string, format: uri }
+        marketingPlan: { type: string, format: uri }
+        blueprint: { type: string, format: uri }
+        gallery: 
+          type: array
+          items: 
+            type: object
+            properties:
+              type: { type: string }
+              url: { type: string }
+        social: { type: object }
+
+    LocalizedString:
+      type: object
+      additionalProperties: { type: string }
+      description: "Map of language codes (en, he, fr) to strings."
+      example: { "en": "Luxury Tower", "he": "מגדל יוקרה" }
+
+    Money:
+      type: object
+      required: [amount, currency]
+      properties:
+        amount: { type: number }
+        currency: { type: string, enum: [ILS, USD, EUR] }
+
+    Location:
+      type: object
+      properties:
+        address: { type: string }
+        city: { type: string }
+        postalCode: { type: string }
+        countryCode: { type: string }
+        coordinates: { type: object, properties: { lat: { type: number }, lng: { type: number } } }
+
+    ProjectStatus:
+      type: object
+      properties:
+        state: { type: string }
+        phase: { type: string }
+        progressPercentage: { type: integer }
+        handoverDate: { type: string, format: date }
+
+    PaymentPlan:
+      type: object
+      properties:
+        currency: { type: string }
+        installments:
+          type: array
+          items:
+            type: object
+            properties:
+              phase: { type: string }
+              percentage: { type: number }
+
+    Interests:
+      type: array
+      items:
+        type: object
+        properties:
+          name: { type: string }
+          type: { type: string }
+          distanceMeters: { type: integer }
+
+    Amenities:
+      type: array
+      items:
+        type: object
+        properties:
+          name: { type: string }
+          cost: { type: string }
+          
+    LegalInfo:
+      type: object
+      properties:
+        permitNumber: { type: string }
+        escrowBank: { type: string }
+        projectBankAccountId: { type: string }
+        lawyer: { type: string }
+
+    ContactInfo:
+      type: object
+      properties:
+        email: { type: string }
+        phone: { type: string }
+        whatsapp: { type: string }
