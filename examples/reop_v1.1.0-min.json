@@ -27,6 +27,11 @@
       "phone": "+97235559999",
       "whatsapp": "+972509998888"
     },
+    "location": {
+      "address": "Rothschild Blvd 10",
+      "city": "Tel Aviv",
+      "countryCode": "IL"
+    },
     "marketing": {
       "website": "https://tlv-urban.example",
       "logo": {
@@ -60,6 +65,10 @@
           "countryCode": "IL",
           "coordinates": { "lat": 32.0625, "lng": 34.7766 }
         },
+        "contact": {
+          "email": "sales@rothschild142.example",
+          "phone": "+97235559900"
+        },
         "marketing": {
           "startingPrice": { "amount": 6200000, "currency": "ILS" },
           "heroImage": "https://cdn.reop.io/prj/roth142/hero.jpg",
@@ -85,7 +94,7 @@
           "lawyer": "Goldfarb Seligman & Co."
         },
         "interests": [
-          { "name": "Habima Theater", "type": "culture", "distanceMeters": 300 },
+          { "name": "Habima Theater", "type": "theater", "distanceMeters": 300 },
           { "name": "Rothschild Center", "type": "mall", "distanceMeters": 150 }
         ],
         "amenities": [
@@ -161,7 +170,7 @@
             "features": {
               "orientation": ["west", "north"],
               "view": "sea_partial",
-              "tags": ["smart_home", "mamad"]
+              "tags": ["smartHome", "safeRoom"]
             }
           }
         ]
