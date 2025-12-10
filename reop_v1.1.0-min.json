@@ -1,0 +1,171 @@
+{
+  "protocol": {
+    "name": "The Real Estate Open Protocol",
+    "version": "1.1.0",
+    "domain": "reop.io",
+    "generatedAt": "2025-11-30T16:00:00Z"
+  },
+  "developer": {
+    "id": "dev_tlv_urban_01",
+    "name": "Tel Aviv Urban Heights",
+    "description": {
+      "en": "A premier developer specializing in Bauhaus-preservation luxury residences.",
+      "he": "יזם מוביל המתמחה במגורי יוקרה ושימור באוהאוס."
+    },
+    "companyDetails": {
+      "legalName": "TLV Urban Heights Ltd.",
+      "companyId": "515998877",
+      "vatId": "IL-515998877"
+    },
+    "history": {
+      "yearsExperience": 15,
+      "projectsDelivered": 8,
+      "unitsSold": 1200
+    },
+    "contact": {
+      "email": "sales@tlv-urban.example",
+      "phone": "+97235559999",
+      "whatsapp": "+972509998888"
+    },
+    "marketing": {
+      "website": "https://tlv-urban.example",
+      "logo": {
+        "square": "https://cdn.reop.io/dev/logo-sq.png",
+        "landscape": "https://cdn.reop.io/dev/logo-wide.png"
+      },
+      "social": {
+        "instagram": "https://instagram.com/tlv_urban",
+        "linkedin": "https://linkedin.com/company/tlv-urban"
+      }
+    },
+    "projects": [
+      {
+        "id": "prj_rothschild_collection",
+        "name": "The Rothschild Collection",
+        "description": {
+          "en": "An architectural icon combining a preserved 1920s ecletic building with a modern glass tower.",
+          "he": "אייקון אדריכלי המשלב מבנה לשימור משנות ה-20 עם מגדל זכוכית מודרני."
+        },
+        "type": "luxury",
+        "status": {
+          "state": "underConstruction",
+          "phase": "structural_frame",
+          "progressPercentage": 45,
+          "handoverDate": "2027-08-30"
+        },
+        "location": {
+          "address": "Rothschild Blvd 142",
+          "city": "Tel Aviv-Yafo",
+          "postalCode": "6527101",
+          "countryCode": "IL",
+          "coordinates": { "lat": 32.0625, "lng": 34.7766 }
+        },
+        "marketing": {
+          "startingPrice": { "amount": 6200000, "currency": "ILS" },
+          "heroImage": "https://cdn.reop.io/prj/roth142/hero.jpg",
+          "projectUrl": "https://tlv-urban.example/rothschild",
+          "brochurePdf": "https://cdn.reop.io/prj/roth142/brochure.pdf",
+          "gallery": [
+            { "type": "image", "url": "https://cdn.reop.io/prj/roth142/lobby.jpg" },
+            { "type": "video", "url": "https://cdn.reop.io/prj/roth142/tour.mp4" }
+          ]
+        },
+        "paymentPlan": {
+          "currency": "ILS",
+          "installments": [
+             { "phase": "signing", "percentage": 15 },
+             { "phase": "foundation", "percentage": 20 },
+             { "phase": "completion", "percentage": 65 }
+          ]
+        },
+        "legal": {
+          "permitNumber": "TA-24-9981",
+          "escrowBank": "Bank Leumi",
+          "projectBankAccountId": "10-222-333444",
+          "lawyer": "Goldfarb Seligman & Co."
+        },
+        "interests": [
+          { "name": "Habima Theater", "type": "culture", "distanceMeters": 300 },
+          { "name": "Rothschild Center", "type": "mall", "distanceMeters": 150 }
+        ],
+        "amenities": [
+          { "name": "doorman", "cost": "included" },
+          { "name": "pool", "cost": "common" },
+          { "name": "smartHome", "cost": "included" }
+        ],
+        
+        "unitModels": [
+          {
+            "id": "model_urban_2br",
+            "name": "Type A - Boulevard View",
+            "description": { "en": "City facing 2 bedroom apartment." },
+            "specs": { 
+              "bedrooms": 2, 
+              "bathrooms": 2, 
+              "interiorAreaSqm": 92, 
+              "balconyAreaSqm": 14 
+            },
+            "marketing": {
+              "startingPrice": { "amount": 6200000, "currency": "ILS" },
+              "marketingPlan": "https://cdn.reop.io/plans/type-a-colored.jpg",
+              "blueprint": "https://cdn.reop.io/plans/type-a-dwg.pdf"
+            }
+          },
+          {
+            "id": "model_sky_3br",
+            "name": "Type B - Sea & City",
+            "specs": { 
+              "bedrooms": 3, 
+              "bathrooms": 2.5, 
+              "interiorAreaSqm": 125, 
+              "balconyAreaSqm": 22 
+            },
+            "marketing": {
+              "startingPrice": { "amount": 8500000, "currency": "ILS" },
+              "marketingPlan": "https://cdn.reop.io/plans/type-b-colored.jpg"
+            }
+          }
+        ],
+
+        "buildings": [
+          {
+            "id": "bldg_tower_1",
+            "name": "The Glass Tower",
+            "numberOfFloors": 30,
+            "numberOfElevators": 4,
+            "marketing": {
+              "startingPrice": { "amount": 6200000, "currency": "ILS" }
+            },
+            "floors": [
+              {
+                "id": "f_12",
+                "number": 12,
+                "name": "Lower Sky",
+                "marketing": { "startingPrice": { "amount": 6250000, "currency": "ILS" } }
+              }
+            ]
+          }
+        ],
+
+        "inventory": [
+          {
+            "id": "u_1201",
+            "unitNumber": "1201",
+            "status": "available",
+            "price": { "amount": 6350000, "currency": "ILS" },
+            "links": {
+              "modelId": "model_urban_2br",
+              "buildingId": "bldg_tower_1",
+              "floorId": "f_12"
+            },
+            "features": {
+              "orientation": ["west", "north"],
+              "view": "sea_partial",
+              "tags": ["smart_home", "mamad"]
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
