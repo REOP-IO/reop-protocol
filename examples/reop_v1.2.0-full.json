@@ -1,0 +1,216 @@
+{
+  "protocol": {
+    "name": "The Real Estate Open Protocol",
+    "version": "1.2.0",
+    "domain": "reop.io",
+    "generatedAt": "2025-12-17T16:00:00Z"
+  },
+  "developers": [
+    {
+      "id": "dev_tlv_urban_01",
+      "name": "Tel Aviv Urban Heights",
+      "projectIds": ["prj_rothschild_collection"],
+      "description": {
+        "en": "A premier developer specializing in Bauhaus-preservation luxury residences.",
+        "he": "יזם מוביל המתמחה במגורי יוקרה ושימור באוהאוס."
+      },
+      "companyDetails": {
+        "legalName": "TLV Urban Heights Ltd.",
+        "companyId": "515998877",
+        "vatId": "IL-515998877"
+      },
+      "history": {
+        "yearsExperience": 15,
+        "projectsDelivered": 8,
+        "unitsSold": 1200
+      },
+      "contact": {
+        "email": "corporate@tlv-urban.example",
+        "phone": "+97235559999",
+        "whatsapp": "+972509998888",
+        "website": "https://tlv-urban.example",
+        "fax": "+97235559998"
+      },
+      "location": {
+        "address": "Rothschild Blvd 10",
+        "city": "Tel Aviv",
+        "postalCode": "6688100",
+        "countryCode": "IL",
+        "coordinates": { "lat": 32.0630, "lng": 34.7700 }
+      },
+      "marketing": {
+        "website": "https://tlv-urban.example",
+        "logo": {
+          "square": "https://cdn.reop.io/dev/logo-sq.png",
+          "landscape": "https://cdn.reop.io/dev/logo-wide.png"
+        },
+        "social": {
+          "linkedin": "https://linkedin.com/company/tlv-urban",
+          "facebook": "https://facebook.com/tlvurban",
+          "instagram": "https://instagram.com/tlv_urban"
+        }
+      }
+    }
+  ],
+  "projects": [
+    {
+      "id": "prj_rothschild_collection",
+      "name": "The Rothschild Collection",
+      "developerIds": ["dev_tlv_urban_01"],
+      "type": "luxury",
+      "description": {
+        "en": "An architectural icon combining a preserved 1920s eclectic building with a modern glass tower. Features smart-home integration and sea views.",
+        "he": "אייקון אדריכלי המשלב מבנה לשימור משנות ה-20 עם מגדל זכוכית מודרני. כולל מערכות בית חכם ונוף לים."
+      },
+      "status": {
+        "state": "underConstruction",
+        "phase": "structural_frame",
+        "progressPercentage": 45,
+        "handoverDate": "2027-08-30"
+      },
+      "location": {
+        "address": "Rothschild Blvd 142",
+        "city": "Tel Aviv-Yafo",
+        "postalCode": "6527101",
+        "countryCode": "IL",
+        "coordinates": { "lat": 32.0625, "lng": 34.7766 }
+      },
+      "contact": {
+        "email": "sales@rothschild142.example",
+        "phone": "+97235559900",
+        "whatsapp": "+972501112222",
+        "website": "https://rothschild142.example"
+      },
+      "marketing": {
+        "startingPrice": { "amount": 6200000, "currency": "ILS" },
+        "heroImage": "https://cdn.reop.io/prj/roth142/hero-render.jpg",
+        "layoutImage": "https://cdn.reop.io/prj/roth142/master-site-plan.jpg",
+        "projectUrl": "https://tlv-urban.example/rothschild",
+        "brochurePdf": "https://cdn.reop.io/prj/roth142/brochure-v2.pdf",
+        "gallery": [
+          { "type": "image", "url": "https://cdn.reop.io/prj/roth142/lobby.jpg" },
+          { "type": "image", "url": "https://cdn.reop.io/prj/roth142/pool-deck.jpg" },
+          { "type": "video", "url": "https://cdn.reop.io/prj/roth142/virtual-tour.mp4" }
+        ],
+        "social": {
+          "instagram": "https://instagram.com/rothschild_collection"
+        }
+      },
+      "paymentPlan": {
+        "currency": "ILS",
+        "installments": [
+          { "phase": "signing", "percentage": 15 },
+          { "phase": "foundation", "percentage": 20 },
+          { "phase": "shell_completion", "percentage": 15 },
+          { "phase": "handover", "percentage": 50 }
+        ]
+      },
+      "legal": {
+        "permitNumber": "TA-24-9981",
+        "escrowBank": "Bank Leumi",
+        "projectBankAccountId": "10-222-333444",
+        "lawyer": "Goldfarb Seligman & Co."
+      },
+      "interests": [
+        { "name": "Habima Theater", "type": "theater", "distanceMeters": 300 },
+        { "name": "Rothschild Center", "type": "mall", "distanceMeters": 150 },
+        { "name": "Independence Hall", "type": "museum", "distanceMeters": 600 },
+        { "name": "Ichilov Hospital", "type": "hospital", "distanceMeters": 2500 }
+      ],
+      "amenities": [
+        { "name": "doorman", "cost": "included" },
+        { "name": "pool", "cost": "common" },
+        { "name": "smartHome", "cost": "included" },
+        { "name": "gym", "cost": "common" },
+        { "name": "undergroundParking", "cost": "private" },
+        { "name": "wineCellar", "cost": "common" },
+        { "name": "bicycleStorage", "cost": "included" },
+        { "name": "spa", "cost": "paid" }
+      ],
+      "unitModels": [
+        {
+          "id": "model_roth_studio",
+          "name": "Type S - City Studio",
+          "description": { "en": "Efficient studio layout perfect for investors." },
+          "specs": { "bedrooms": 0, "bathrooms": 1, "interiorAreaSqm": 45, "balconyAreaSqm": 0 },
+          "marketing": { 
+            "startingPrice": { "amount": 6200000, "currency": "ILS" },
+            "layoutImage": "https://cdn.reop.io/plans/studio-layout.jpg",
+            "blueprint": "https://cdn.reop.io/blueprints/studio-dwg.pdf"
+          }
+        },
+        {
+          "id": "model_roth_1br",
+          "name": "Type A - Urban 1BR",
+          "description": { "en": "Spacious one bedroom with sunset balcony." },
+          "specs": { "bedrooms": 1, "bathrooms": 1, "interiorAreaSqm": 62, "balconyAreaSqm": 8 },
+          "marketing": { 
+            "startingPrice": { "amount": 7100000, "currency": "ILS" },
+            "layoutImage": "https://cdn.reop.io/plans/1br-layout.jpg" 
+          }
+        },
+        {
+          "id": "model_roth_2br",
+          "name": "Type B - Boulevard 2BR",
+          "description": { "en": "Family apartment facing the historic boulevard." },
+          "specs": { "bedrooms": 2, "bathrooms": 2, "interiorAreaSqm": 92, "balconyAreaSqm": 14 },
+          "marketing": { 
+            "startingPrice": { "amount": 9500000, "currency": "ILS" },
+            "layoutImage": "https://cdn.reop.io/plans/2br-layout.jpg" 
+          }
+        },
+        {
+          "id": "model_roth_ph",
+          "name": "Type PH - Sky Penthouse",
+          "description": { "en": "Full floor penthouse with 360 degree views." },
+          "specs": { "bedrooms": 3, "bathrooms": 3.5, "interiorAreaSqm": 180, "balconyAreaSqm": 80 },
+          "marketing": { 
+            "startingPrice": { "amount": 22000000, "currency": "ILS" },
+            "layoutImage": "https://cdn.reop.io/plans/ph-layout.jpg" 
+          }
+        }
+      ],
+      "buildings": [
+        {
+          "id": "bldg_glass_tower",
+          "name": "The Glass Tower",
+          "numberOfFloors": 30,
+          "numberOfElevators": 4,
+          "description": { "en": "The main residential tower." },
+          "marketing": { "heroImage": "https://cdn.reop.io/prj/roth142/tower-exterior.jpg" },
+          "floors": [
+            { "id": "f_01", "number": 1, "name": "Garden Level" },
+            { "id": "f_15", "number": 15, "name": "Sky Lobby Level" },
+            { "id": "f_30", "number": 30, "name": "Penthouse Level" }
+          ]
+        }
+      ],
+      "inventory": [
+        {
+          "id": "u_roth_101",
+          "unitNumber": "101",
+          "status": "available",
+          "price": { "amount": 6350000, "currency": "ILS" },
+          "links": { "modelId": "model_roth_1br", "buildingId": "bldg_glass_tower", "floorId": "f_01" },
+          "features": { "orientation": ["west", "north"], "view": "garden", "tags": ["highCeilings"] }
+        },
+        {
+          "id": "u_roth_1502",
+          "unitNumber": "1502",
+          "status": "reserved",
+          "price": { "amount": 9600000, "currency": "ILS" },
+          "links": { "modelId": "model_roth_2br", "buildingId": "bldg_glass_tower", "floorId": "f_15" },
+          "features": { "orientation": ["south", "east"], "view": "city", "tags": ["premiumFinish"] }
+        },
+        {
+          "id": "u_roth_3001",
+          "unitNumber": "3001",
+          "status": "available",
+          "price": { "amount": 22500000, "currency": "ILS" },
+          "links": { "modelId": "model_roth_ph", "buildingId": "bldg_glass_tower", "floorId": "f_30" },
+          "features": { "orientation": ["west", "north", "south", "east"], "view": "sea_full", "tags": ["smartHome", "jacuzzi", "privateElevator"] }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "protocol": {
+    "version": "1.2.0"
+  },
+  "developers": [
+    {
+      "id": "dev_tlv_urban_01",
+      "name": "Tel Aviv Urban Heights"
+    }
+  ],
+  "projects": [
+    {
+      "id": "prj_rothschild_collection",
+      "name": "The Rothschild Collection",
+      "developerIds": [
+        "dev_tlv_urban_01"
+      ],
+      "status": {
+        "state": "underConstruction"
+      },
+      "location": {
+        "address": "Rothschild Blvd 142",
+        "city": "Tel Aviv-Yafo",
+        "countryCode": "IL"
+      }
+    }
+  ]
+}
