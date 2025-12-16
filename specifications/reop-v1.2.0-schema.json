@@ -1,0 +1,258 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Real Estate Open Protocol (REOP) v1.2.0",
+  "type": "object",
+  "required": ["protocol", "developers", "projects"],
+  "properties": {
+    "protocol": {
+      "type": "object",
+      "required": ["version"],
+      "properties": {
+        "name": { "type": "string" },
+        "version": { "type": "string", "const": "1.2.0" },
+        "domain": { "type": "string" },
+        "generatedAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "developers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "projectIds": { "type": "array", "items": { "type": "string" } },
+          "description": { "$ref": "#/definitions/LocalizedString" },
+          "companyDetails": {
+            "type": "object",
+            "properties": {
+              "legalName": { "type": "string" },
+              "companyId": { "type": "string" },
+              "vatId": { "type": "string" }
+            }
+          },
+          "history": {
+             "type": "object",
+             "properties": {
+                "yearsExperience": { "type": "integer" },
+                "projectsDelivered": { "type": "integer" },
+                "unitsSold": { "type": "integer" }
+             }
+          },
+          "contact": { "$ref": "#/definitions/ContactInfo" },
+          "location": { "$ref": "#/definitions/Location" },
+          "marketing": { "$ref": "#/definitions/MarketingInfo" }
+        }
+      }
+    },
+    "projects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "developerIds", "status", "location"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "developerIds": { 
+            "type": "array", 
+            "items": { "type": "string" },
+            "minItems": 1
+          },
+          "description": { "$ref": "#/definitions/LocalizedString" },
+          "type": { "type": "string", "enum": ["luxury", "investment", "mixedUse", "affordable", "commercial", "residential"] },
+          "status": {
+             "type": "object",
+             "required": ["state"],
+             "properties": {
+                "state": { "type": "string", "enum": ["planning", "presale", "underConstruction", "completed", "onHold", "cancelled"] },
+                "phase": { "type": "string" },
+                "progressPercentage": { "type": "integer" },
+                "handoverDate": { "type": "string", "format": "date" }
+             }
+          },
+          "location": { "$ref": "#/definitions/Location" },
+          "contact": { "$ref": "#/definitions/ContactInfo" },
+          "marketing": { "$ref": "#/definitions/MarketingInfo" },
+          "paymentPlan": {
+             "type": "object",
+             "properties": {
+                "currency": { "type": "string" },
+                "installments": {
+                   "type": "array",
+                   "items": {
+                      "type": "object",
+                      "properties": { "phase": { "type": "string" }, "percentage": { "type": "number" } }
+                   }
+                }
+             }
+          },
+          "legal": {
+             "type": "object",
+             "properties": {
+                "permitNumber": { "type": "string" },
+                "escrowBank": { "type": "string" },
+                "projectBankAccountId": { "type": "string" },
+                "lawyer": { "type": "string" }
+             }
+          },
+          "amenities": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": { "type": "string" },
+                "cost": { "type": "string", "enum": ["included", "paid", "common", "private"] }
+              }
+            }
+          },
+          "interests": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": { "type": "string" },
+                "type": { "type": "string" },
+                "distanceMeters": { "type": "integer" }
+              }
+            }
+          },
+          "unitModels": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["id", "name", "specs"],
+              "properties": {
+                "id": { "type": "string" },
+                "name": { "type": "string" },
+                "description": { "$ref": "#/definitions/LocalizedString" },
+                "specs": {
+                  "type": "object",
+                  "properties": {
+                    "bedrooms": { "type": "number" },
+                    "bathrooms": { "type": "number" },
+                    "interiorAreaSqm": { "type": "number" },
+                    "balconyAreaSqm": { "type": "number" }
+                  }
+                },
+                "marketing": { "$ref": "#/definitions/MarketingInfo" }
+              }
+            }
+          },
+          "buildings": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["id", "name"],
+              "properties": {
+                "id": { "type": "string" },
+                "name": { "type": "string" },
+                "numberOfFloors": { "type": "integer" },
+                "description": { "$ref": "#/definitions/LocalizedString" },
+                "marketing": { "$ref": "#/definitions/MarketingInfo" },
+                "floors": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": { "type": "string" },
+                      "number": { "type": "integer" },
+                      "name": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "inventory": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["id", "unitNumber", "links"],
+              "properties": {
+                "id": { "type": "string" },
+                "unitNumber": { "type": "string" },
+                "status": { "type": "string", "enum": ["available", "reserved", "sold", "notForSale"] },
+                "price": { "$ref": "#/definitions/Money" },
+                "links": {
+                  "type": "object",
+                  "required": ["modelId", "buildingId"],
+                  "properties": {
+                    "modelId": { "type": "string" },
+                    "buildingId": { "type": "string" },
+                    "floorId": { "type": "string" }
+                  }
+                },
+                "features": {
+                   "type": "object",
+                   "properties": {
+                      "orientation": { "type": "array", "items": { "type": "string" } },
+                      "view": { "type": "string" },
+                      "tags": { "type": "array", "items": { "type": "string" } }
+                   }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "LocalizedString": { "type": "object", "additionalProperties": { "type": "string" } },
+    "Money": {
+      "type": "object",
+      "required": ["amount", "currency"],
+      "properties": { "amount": { "type": "number" }, "currency": { "type": "string", "enum": ["ILS", "USD", "EUR"] } }
+    },
+    "ContactInfo": {
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "format": "email" },
+        "phone": { "type": "string" },
+        "mobile": { "type": "string" },
+        "fax": { "type": "string" },
+        "whatsapp": { "type": "string" },
+        "website": { "type": "string", "format": "uri" }
+      }
+    },
+    "Location": {
+      "type": "object",
+      "properties": {
+        "address": { "type": "string" },
+        "city": { "type": "string" },
+        "postalCode": { "type": "string" },
+        "countryCode": { "type": "string" },
+        "coordinates": { "type": "object", "properties": { "lat": { "type": "number" }, "lng": { "type": "number" } } }
+      }
+    },
+    "MarketingInfo": {
+      "type": "object",
+      "properties": {
+        "startingPrice": { "$ref": "#/definitions/Money" },
+        "heroImage": { "type": "string", "format": "uri" },
+        "layoutImage": { "type": "string", "format": "uri" },
+        "website": { "type": "string", "format": "uri" },
+        "projectUrl": { "type": "string", "format": "uri" },
+        "brochurePdf": { "type": "string", "format": "uri" },
+        "blueprint": { "type": "string", "format": "uri" },
+        "logo": { "type": "object", "properties": { "square": { "type": "string" }, "landscape": { "type": "string" } } },
+        "social": {
+           "type": "object",
+           "properties": {
+              "facebook": { "type": "string" },
+              "instagram": { "type": "string" },
+              "linkedin": { "type": "string" }
+           }
+        },
+        "gallery": {
+           "type": "array",
+           "items": {
+              "type": "object",
+              "properties": { "type": { "type": "string" }, "url": { "type": "string" } }
+           }
+        }
+      }
+    }
+  }
+}

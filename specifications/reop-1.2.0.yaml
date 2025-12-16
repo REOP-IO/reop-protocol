@@ -1,0 +1,476 @@
+openapi: 3.1.0
+info:
+  title: The Real Estate Open Protocol (REOP)
+  version: 1.2.0
+  description: |
+    The comprehensive standard for Global Real Estate Development.
+    v1.2.0 Update: Flattened architecture for Many-to-Many Developer/Project relationships.
+
+servers:
+  - url: https://api.reop.io/v1
+
+paths: {}
+
+components:
+  schemas:
+    # --- ROOT (UPDATED) ---
+    RealEstateCatalog:
+      type: object
+      description: "Root container for flattened Developer and Project lists."
+      properties:
+        protocol: 
+          type: object
+          properties: 
+            name: { type: string }
+            version: { type: string }
+            domain: { type: string }
+            generatedAt: { type: string, format: date-time }
+        developers: 
+          type: array
+          items: { $ref: '#/components/schemas/Developer' }
+        projects: 
+          type: array
+          items: { $ref: '#/components/schemas/Project' }
+
+    # --- ENTITIES ---
+    Developer:
+      type: object
+      required: [id, name]
+      properties:
+        id: { type: string }
+        name: { type: string }
+        description: { $ref: '#/components/schemas/LocalizedString' }
+        projectIds:
+          type: array
+          description: "List of Project IDs this developer is involved in."
+          items: { type: string }
+        companyDetails:
+          type: object
+          properties:
+            legalName: { type: string }
+            companyId: { type: string }
+            vatId: { type: string }
+        history:
+          type: object
+          properties:
+            yearsExperience: { type: integer }
+            projectsDelivered: { type: integer }
+            unitsSold: { type: integer }
+        contact: { $ref: '#/components/schemas/ContactInfo' }
+        marketing: { $ref: '#/components/schemas/MarketingInfo' }
+        location: { $ref: '#/components/schemas/Location' } # Developer HQ Address
+
+    Project:
+      type: object
+      required: [id, name, location, status, developerIds]
+      properties:
+        id: { type: string }
+        name: { type: string }
+        # --- NEW LINKING FIELD ---
+        developerIds:
+          type: array
+          description: "List of Developer IDs (Initiators) involved in this project."
+          items: { type: string }
+        # -------------------------
+        description: { $ref: '#/components/schemas/LocalizedString' }
+        type: { type: string, enum: [luxury, investment, mixedUse, affordable, commercial, residential] }
+        status: { $ref: '#/components/schemas/ProjectStatus' }
+        location: { $ref: '#/components/schemas/Location' }
+        contact: { $ref: '#/components/schemas/ContactInfo' }
+        marketing: { $ref: '#/components/schemas/MarketingInfo' }
+        paymentPlan: { $ref: '#/components/schemas/PaymentPlan' }
+        legal: { $ref: '#/components/schemas/LegalInfo' }
+        
+        # Lists using Enums
+        interests: 
+          type: array
+          items: { $ref: '#/components/schemas/InterestItem' }
+        amenities: 
+          type: array
+          items: { $ref: '#/components/schemas/AmenityItem' }
+        
+        # Structure Hierarchy
+        unitModels:
+          type: array
+          items: { $ref: '#/components/schemas/UnitModel' }
+        buildings:
+          type: array
+          items: { $ref: '#/components/schemas/Building' }
+        inventory:
+          type: array
+          items: { $ref: '#/components/schemas/Unit' }
+
+    # ... [ALL OTHER SUB-SCHEMAS REMAIN IDENTICAL TO v1.1.0] ...
+    # (Building, Floor, UnitModel, Unit, Location, MarketingInfo, etc.)
+    # Copy them from the previous file to complete this YAML.
+    
+    Building:
+      type: object
+      required: [id, name]
+      properties:
+        id: { type: string }
+        name: { type: string }
+        description: { $ref: '#/components/schemas/LocalizedString' }
+        numberOfFloors: { type: integer }
+        numberOfElevators: { type: integer }
+        marketing: { $ref: '#/components/schemas/MarketingInfo' }
+        floors:
+          type: array
+          items: { $ref: '#/components/schemas/Floor' }
+
+    Floor:
+      type: object
+      required: [number]
+      properties:
+        id: { type: string }
+        number: { type: integer }
+        name: { type: string }
+        marketing: { $ref: '#/components/schemas/MarketingInfo' }
+
+    UnitModel:
+      type: object
+      required: [id, name, specs]
+      properties:
+        id: { type: string }
+        name: { type: string }
+        description: { $ref: '#/components/schemas/LocalizedString' }
+        specs:
+          type: object
+          properties:
+            bedrooms: { type: number }
+            bathrooms: { type: number }
+            interiorAreaSqm: { type: number }
+            balconyAreaSqm: { type: number }
+            gardenAreaSqm: { type: number }
+        marketing: { $ref: '#/components/schemas/MarketingInfo' }
+
+    Unit:
+      type: object
+      required: [id, unitNumber, status, links]
+      properties:
+        id: { type: string }
+        unitNumber: { type: string }
+        status: { type: string, enum: [available, reserved, sold, notForSale] }
+        price: { $ref: '#/components/schemas/Money' }
+        startingPrice: { $ref: '#/components/schemas/Money' }
+        links:
+          type: object
+          required: [modelId]
+          properties:
+            modelId: { type: string }
+            buildingId: { type: string }
+            floorId: { type: string }
+        features:
+          type: object
+          properties:
+            orientation: 
+              type: array
+              items: { $ref: '#/components/schemas/OrientationEnum' }
+            view: { $ref: '#/components/schemas/ViewEnum' }
+            tags: { type: array, items: { type: string } }
+
+    # --- SHARED COMPONENTS ---
+    
+    # 1. Location
+    Location:
+      type: object
+      properties:
+        address: { type: string }
+        city: { type: string }
+        postalCode: { type: string }
+        countryCode: { type: string, description: "ISO 3166-1 alpha-2 code (e.g. IL, US)" }
+        coordinates: { type: object, properties: { lat: { type: number }, lng: { type: number } } }
+
+    # 2. Marketing
+    MarketingInfo:
+      type: object
+      properties:
+        startingPrice: { $ref: '#/components/schemas/Money' }
+        heroImage: { type: string, format: uri }
+        logo: { type: object, properties: { square: { type: string }, landscape: { type: string } } }
+        website: { type: string, format: uri }
+        projectUrl: { type: string, format: uri }
+        brochurePdf: { type: string, format: uri }
+        layoutImage: { type: string, format: uri }
+        blueprint: { type: string, format: uri }
+        social: { $ref: '#/components/schemas/SocialInfo' }
+        gallery: 
+          type: array
+          items: 
+            type: object
+            properties:
+              type: { type: string }
+              url: { type: string }
+
+    # 3. Contact (Reserved Names)
+    ContactInfo:
+      type: object
+      description: "Standardized contact methods."
+      properties:
+        email: { type: string, format: email }
+        phone: { type: string }
+        mobile: { type: string }
+        fax: { type: string }
+        whatsapp: { type: string }
+        telegram: { type: string }
+        wechat: { type: string }
+        line: { type: string }
+        signal: { type: string }
+        messenger: { type: string }
+        website: { type: string, format: uri }
+
+    # 4. Social Networks (Reserved Names)
+    SocialInfo:
+      type: object
+      description: "Links to official social media profiles."
+      properties:
+        facebook: { type: string, format: uri }
+        instagram: { type: string, format: uri }
+        linkedin: { type: string, format: uri }
+        twitter: { type: string, format: uri }
+        youtube: { type: string, format: uri }
+        tiktok: { type: string, format: uri }
+        pinterest: { type: string, format: uri }
+        snapchat: { type: string, format: uri }
+        vimeo: { type: string, format: uri }
+        discord: { type: string, format: uri }
+        reddit: { type: string, format: uri }
+        github: { type: string, format: uri }
+
+    # --- HELPERS ---
+    
+    LocalizedString:
+      type: object
+      additionalProperties: { type: string }
+      description: "Map of ISO 639-1 two-letter language codes to strings (e.g., 'en', 'he', 'fr')."
+      example: { "en": "Luxury Tower", "he": "מגדל יוקרה" }
+
+    Money:
+      type: object
+      required: [amount, currency]
+      properties:
+        amount: { type: number }
+        currency: { type: string, enum: [ILS, USD, EUR] }
+
+    ProjectStatus:
+      type: object
+      properties:
+        state: 
+          type: string
+          enum: [planning, presale, underConstruction, completed, onHold, cancelled]
+        phase: { type: string }
+        progressPercentage: { type: integer }
+        handoverDate: { type: string, format: date }
+
+    PaymentPlan:
+      type: object
+      properties:
+        currency: { type: string }
+        installments:
+          type: array
+          items:
+            type: object
+            properties:
+              phase: { type: string }
+              percentage: { type: number }
+
+    LegalInfo:
+      type: object
+      properties:
+        permitNumber: { type: string }
+        escrowBank: { type: string }
+        projectBankAccountId: { type: string }
+        lawyer: { type: string }
+
+    # --- ENUMS & DICTIONARIES ---
+    
+    AmenityItem:
+      type: object
+      properties:
+        name: { $ref: '#/components/schemas/AmenityEnum' }
+        cost: { type: string, enum: [included, paid, common, private] }
+
+    InterestItem:
+      type: object
+      properties:
+        name: { type: string }
+        type: { $ref: '#/components/schemas/InterestEnum' }
+        distanceMeters: { type: integer }
+
+    AmenityEnum:
+      type: string
+      enum:
+        - airConditioning
+        - heating
+        - centralHeating
+        - underfloorHeating
+        - elevator
+        - freightElevator
+        - shabbatElevator
+        - parking
+        - undergroundParking
+        - coveredParking
+        - robotParking
+        - guestParking
+        - evCharging
+        - storage
+        - bicycleStorage
+        - strollerRoom
+        - balcony
+        - terrace
+        - privateGarden
+        - roofDeck
+        - pool
+        - infinityPool
+        - heatedPool
+        - kidsPool
+        - indoorPool
+        - jacuzzi
+        - sauna
+        - steamRoom
+        - spa
+        - gym
+        - yogaStudio
+        - tennisCourt
+        - squashCourt
+        - basketballCourt
+        - paddleCourt
+        - runningTrack
+        - playground
+        - kidsClub
+        - gameRoom
+        - cinema
+        - library
+        - coworkingSpace
+        - conferenceRoom
+        - lounge
+        - partyRoom
+        - bbqArea
+        - outdoorKitchen
+        - doorman
+        - concierge
+        - securitySystem
+        - cctv
+        - intercom
+        - videoIntercom
+        - keylessEntry
+        - smartHome
+        - generator
+        - solarPanels
+        - waterTank
+        - accessibility
+        - wheelchairAccessible
+        - furnished
+        - partiallyFurnished
+        - kitchenIsland
+        - walkInCloset
+        - safeRoom
+        - highCeilings
+        - doubleGlazing
+        - parquetFlooring
+        - marbleFlooring
+        - fireplace
+        - dishwasher
+        - washingMachine
+        - dryer
+        - microwave
+        - refrigerator
+        - wineCellar
+        - petsAllowed
+        - smokingAllowed
+        - cleaningService
+        - laundryService
+        - shuttleService
+        - maintenanceOnSite
+
+    InterestEnum:
+      type: string
+      enum:
+        - school
+        - kindergarten
+        - nursery
+        - university
+        - college
+        - library
+        - busStation
+        - trainStation
+        - subwayStation
+        - tramStation
+        - lightRailStation
+        - airport
+        - highwayAccess
+        - taxiStand
+        - bikeShare
+        - ferryTerminal
+        - hospital
+        - clinic
+        - pharmacy
+        - dentist
+        - veterinarian
+        - supermarket
+        - groceryStore
+        - convenienceStore
+        - bakery
+        - market
+        - mall
+        - shoppingCenter
+        - departmentStore
+        - outlet
+        - furnitureStore
+        - hardwareStore
+        - bank
+        - atm
+        - postOffice
+        - policeStation
+        - fireStation
+        - cityHall
+        - embassy
+        - synagogue
+        - church
+        - mosque
+        - temple
+        - religiousCenter
+        - park
+        - dogPark
+        - playground
+        - natureReserve
+        - beach
+        - lake
+        - river
+        - marina
+        - forest
+        - mountain
+        - gym
+        - sportsCenter
+        - swimmingPool
+        - stadium
+        - golfCourse
+        - skatePark
+        - restaurant
+        - cafe
+        - bar
+        - pub
+        - coffeeShop
+        - fastFood
+        - foodCourt
+        - cinema
+        - theater
+        - museum
+        - artGallery
+        - concertHall
+        - operaHouse
+        - zoo
+        - aquarium
+        - themePark
+        - bowlingAlley
+        - casino
+        - nightClub
+        - hotel
+
+    OrientationEnum:
+      type: string
+      enum: [north, south, east, west, northEast, northWest, southEast, southWest]
+
+    ViewEnum:
+      type: string
+      enum: [sea_full, sea_partial, city, park, garden, pool, mountain, lake, river, marina, forest, street, courtyard, golf_course, landmark, internal]
