@@ -1,0 +1,39 @@
+{
+  "protocol": {
+    "name": "REOP",
+    "version": "1.4.0"
+  },
+  "project": {
+    "id": "prj_rothschild_collection",
+    "name": {
+      "en": "The Rothschild Collection",
+      "he": "אוסף רוטשילד"
+    },
+    "status": {
+      "state": "underConstruction"
+    },
+    "location": {
+      "address": {
+        "en": "Rothschild Blvd 142",
+        "he": "שדרות רוטשילד 142"
+      },
+      "city": {
+        "en": "Tel Aviv-Yafo",
+        "he": "תל אביב-יפו"
+      },
+      "countryCode": "IL"
+    },
+    "marketing": {
+      "startingPrice": {
+        "amount": 1,
+        "currency": "nis"
+      }
+    }
+  },
+  "developer": {
+    "id": "dev_tlv_urban_01",
+    "name": {
+      "en": "Tel Aviv Urban Heights"
+    }
+  }
+}

@@ -1,49 +1,79 @@
 # REOP (Real Estate Open Protocol)
 
-The official repository for the Real Estate Open Protocol (REOP).
+The official repository of the Real Estate Open Protocol (REOP): an open, vendor-neutral standard for structuring, exchanging and updating new-development (off-plan / pre-sale) real estate data, from developer systems to marketplaces, AI agents and digital platforms.
 
-REOP is an open-source, vendor-neutral standard for structuring, exchanging, and consuming complex real estate development data (Off-Plan/Pre-Sale). It aims to solve the industry's data fragmentation crisis by providing a single, machine-readable JSON schema for all digital systems, from AI agents to marketplaces.
+Current version: **1.4.0** (release candidate). Machine-readable index: [`versions.json`](versions.json).
 
-## 🚀 Vision: The Golden Record
+## What REOP describes
 
-Real estate data today is trapped in PDFs, ad-hoc feeds, and unstructured websites. REOP is the solution, defining **what** data is exchanged and **how** it evolves over time.
+`Developer` -> `Project` -> `Building` -> `Floor` -> `UnitModel` (a unit type) -> `Unit` (a specific apartment in the inventory)
 
-Our goal is simple: **Don't be invisible to the future.** The data must be ready for autonomous AI agents and modern digital platforms.
+- **Decoupled inventory**: a project can be published with its unit types alone; specific units with their availability follow when the developer's systems supply them.
+- **Multilingual by design**: every human text is a `LocalizedString` map (`{ "en": "...", "he": "..." }`).
+- **Media as objects**: images, videos, floor plans, documents and 3D / virtual-tour experiences share one shape, vendor neutral.
+- **Inventory synchronisation**: an `InventoryUpdate` document carries unit status and price changes from ERP / CRM systems.
+- **Evolvable**: `protocol.version` on every document, deprecations instead of removals in minor releases, `extensions` for vendor data, unknown members preserved.
 
-## 🛠️ Protocol Structure
+## Documents
 
-The REOP protocol models the real estate domain as a flexible hierarchy:
+| Document | Use | Schema definition |
+|---|---|---|
+| `RealEstateCatalog` | A feed: many developers and projects linked by ids | `#/$defs/RealEstateCatalog` |
+| `ProjectDocument` | One project with its developer: what an API exchanges per project | `#/$defs/ProjectDocument` |
+| `InventoryUpdate` | A partial, idempotent delta of unit availability | `#/$defs/InventoryUpdate` |
 
-`Developer` → `Project` → `Building` → `Floor` → `UnitModel` → `Unit`
+## Files
 
-### Key Features of the Protocol 
+| Path | What |
+|---|---|
+| [`schema/1.4.0/reop.schema.json`](schema/1.4.0/reop.schema.json) | **The contract**: canonical JSON Schema (draft 2020-12) with every object definition |
+| [`specifications/reop-1.4.0.yaml`](specifications/reop-1.4.0.yaml) | OpenAPI 3.1 document generated from the schema (reference endpoints, Redoc rendering) |
+| [`vocabularies/`](vocabularies) | Controlled values with labels: amenities, interests, views, orientations, unit statuses, availability, media types, document roles, experience types and providers, payment phases, room-count conventions |
+| [`examples/1.4.0/`](examples/1.4.0) | Full catalog, project document, minimal document, inventory update, and must-fail cases under `invalid/` |
+| [`migrations/1.3.0-to-1.4.0.md`](migrations/1.3.0-to-1.4.0.md) | Upgrade rules, consumer and producer checklists |
+| [`CHANGELOG.md`](CHANGELOG.md) | Release history |
+| [`versions.json`](versions.json) | Index of every release with its schema, examples and status |
+| `specifications/reop-1.3.0.yaml`, `reop-v1.3.0-schema.json`, older | Previous releases, frozen |
 
-* **Decoupled Inventory:** Supports both the high-level **Unit Model** (Type A) and the granular **Unit** (Specific Inventory), allowing projects to be listed even if availability is limited.
-* **Inheritance & Overrides:** Data defined at a higher level (e.g., Project Amenities) propagates downward to children, minimizing payload size and redundancy.
-* **AI-Ready Fields:** Includes necessary fields for semantic matching, such as `orientation`, `legalInfo` (Escrow/Bank), and multilingual descriptions (`he`/`en`).
-* **Delta-Friendly:** Supports partial updates for rapid changes in pricing and availability.
+## Quick start
 
-## 📜 Current Specification (v1.1.0)
+A minimal `ProjectDocument`:
 
-You can find the definitive protocol files here:
+```json
+{
+  "protocol": { "name": "REOP", "version": "1.4.0" },
+  "project": {
+    "id": "prj_rothschild_collection",
+    "name": { "en": "The Rothschild Collection", "he": "אוסף רוטשילד" },
+    "status": { "state": "underConstruction" },
+    "location": { "city": { "en": "Tel Aviv-Yafo" }, "countryCode": "IL" }
+  },
+  "developer": { "id": "dev_tlv_urban_01", "name": { "en": "Tel Aviv Urban Heights" } }
+}
+```
 
-| File | Description |
-| :--- | :--- |
-| **`specifications/reop-v1.1.0.yaml`** | The full OpenAPI 3.1.0 definition, including all component schemas (The Contract). |
-| **`examples/reop_v1.1.0-min.json`** | A fully populated example of a Tel Aviv project, demonstrating data structure and hierarchy. |
+Validate your documents:
 
----
+```bash
+npm ci
+node tools/validate.mjs path/to/document.json
+```
 
-## 🤝 Community & Contribution
+The reference implementation serves `GET /v1/projects/{id}/reop` (a `ProjectDocument`), accepts documents on `PUT /v1/projects/{id}` and inventory deltas on `POST /v1/projects/{id}/inventory/updates`, and announces its supported versions on `GET /v1/meta/reop-manifest`. Every served document carries the `X-REOP-Version` header.
 
-REOP is an open protocol. We welcome feedback, bug reports, and proposals for new fields (e.g., for Commercial Real Estate in `vNext`).
+## Versioning policy
 
-* **Discussions:** Got a question? Want to suggest an improvement? Head over to the **Discussions** tab.
-* **Bugs:** Report issues or errors in the existing specification via **Issues**.
+- Semantic Versioning. A **minor** release only adds optional members, loosens constraints or deprecates; a **major** release may remove or rename.
+- Every document declares `protocol.version`. Consumers accept any document of the same major: lower minors through the published upgrade rules, higher minors by preserving and ignoring unknown members.
+- Deprecated members carry `deprecated: true` and `x-replacedBy` in the schema and stay valid until the next major.
+- Each release ships: a canonical JSON Schema, a generated OpenAPI document, vocabularies, validated examples, a changelog entry, a migration guide from the previous version and an entry in `versions.json`.
 
-### Get Started
+## Rooms and bedrooms
 
-1.  **Read the Specs:** [View the full interactive documentation on Redoc](https://reop.io/spec.html)
-2.  **Start Building:** Access the API endpoints at `https://api.reop.io/v1`.
+`specs.rooms` (the habitable-room count a local listing prints, living room included where the market counts it) and `specs.bedrooms` (separate sleeping rooms) are independent facts. Store what the source states; never derive one from the other for storage. Market conventions: [`vocabularies/roomCountConventions.json`](vocabularies/roomCountConventions.json).
 
-For commercial inquiries or partnership opportunities, please contact `info@reop.io`.
+## Community
+
+REOP is an open protocol. Proposals and questions go to GitHub Issues (see [CONTRIBUTING.md](CONTRIBUTING.md)). Specification pages and news: [reop.io](https://reop.io). Commercial inquiries: `info@reop.io`.
+
+License: MIT.

@@ -1,0 +1,44 @@
+{
+  "name": "paymentPhases",
+  "protocolVersion": "1.4.0",
+  "version": "2026-09-30",
+  "description": "Recommended PaymentInstallment.phase keys. Open.",
+  "closed": false,
+  "items": [
+    {
+      "key": "signing",
+      "labels": {
+        "en": "On signing",
+        "he": "בחתימה"
+      }
+    },
+    {
+      "key": "foundation",
+      "labels": {
+        "en": "Foundation",
+        "he": "יסודות"
+      }
+    },
+    {
+      "key": "shell_completion",
+      "labels": {
+        "en": "Shell completion",
+        "he": "סיום שלד"
+      }
+    },
+    {
+      "key": "finishing",
+      "labels": {
+        "en": "Finishing works",
+        "he": "עבודות גמר"
+      }
+    },
+    {
+      "key": "handover",
+      "labels": {
+        "en": "Handover",
+        "he": "מסירה"
+      }
+    }
+  ]
+}

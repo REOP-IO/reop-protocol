@@ -1,0 +1,63 @@
+{
+  "name": "documentRoles",
+  "protocolVersion": "1.4.0",
+  "version": "2026-09-30",
+  "description": "Recommended MediaAsset.role values for gallery[], floorPlans[] and documents[]. Open.",
+  "closed": false,
+  "items": [
+    {
+      "key": "hero",
+      "labels": {
+        "en": "Hero image"
+      }
+    },
+    {
+      "key": "plan",
+      "labels": {
+        "en": "Floor plan"
+      }
+    },
+    {
+      "key": "sitePlan",
+      "labels": {
+        "en": "Site plan"
+      }
+    },
+    {
+      "key": "blueprint",
+      "labels": {
+        "en": "Blueprint or CAD file"
+      }
+    },
+    {
+      "key": "brochure",
+      "labels": {
+        "en": "Brochure"
+      }
+    },
+    {
+      "key": "priceList",
+      "labels": {
+        "en": "Price list"
+      }
+    },
+    {
+      "key": "specification",
+      "labels": {
+        "en": "Technical specification"
+      }
+    },
+    {
+      "key": "legal",
+      "labels": {
+        "en": "Legal document"
+      }
+    },
+    {
+      "key": "other",
+      "labels": {
+        "en": "Other"
+      }
+    }
+  ]
+}

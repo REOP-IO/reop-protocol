@@ -1,0 +1,23 @@
+name: Validate protocol artefacts
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Validate every example against its version's schema (invalid/ cases must be rejected)
+        run: npm run validate
+      - name: Check the generated OpenAPI document is in sync with the JSON Schema
+        run: node tools/build-openapi.mjs --check
+      - name: Check vocabularies are well formed
+        run: node tools/check-vocabularies.mjs

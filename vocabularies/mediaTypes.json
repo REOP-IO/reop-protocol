@@ -1,0 +1,44 @@
+{
+  "name": "mediaTypes",
+  "protocolVersion": "1.4.0",
+  "version": "2026-09-30",
+  "description": "MediaAsset.type values.",
+  "closed": true,
+  "items": [
+    {
+      "key": "image",
+      "labels": {
+        "en": "Image",
+        "he": "תמונה"
+      }
+    },
+    {
+      "key": "video",
+      "labels": {
+        "en": "Video",
+        "he": "וידאו"
+      }
+    },
+    {
+      "key": "document",
+      "labels": {
+        "en": "Document",
+        "he": "מסמך"
+      }
+    },
+    {
+      "key": "model3d",
+      "labels": {
+        "en": "3D model",
+        "he": "מודל תלת-ממד"
+      }
+    },
+    {
+      "key": "other",
+      "labels": {
+        "en": "Other",
+        "he": "אחר"
+      }
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "name": "views",
+  "protocolVersion": "1.4.0",
+  "version": "2026-09-30",
+  "description": "Unit view values (ViewEnum of 1.3.0, unchanged).",
+  "closed": true,
+  "items": [
+    {
+      "key": "sea_full",
+      "labels": {
+        "en": "Full Sea View",
+        "he": "ים מלא"
+      }
+    },
+    {
+      "key": "sea_partial",
+      "labels": {
+        "en": "Partial Sea View",
+        "he": "ים חלקי"
+      }
+    },
+    {
+      "key": "city",
+      "labels": {
+        "en": "City",
+        "he": "עיר"
+      }
+    },
+    {
+      "key": "park",
+      "labels": {
+        "en": "Park",
+        "he": "פארק"
+      }
+    },
+    {
+      "key": "garden",
+      "labels": {
+        "en": "Garden",
+        "he": "גינה"
+      }
+    },
+    {
+      "key": "pool",
+      "labels": {
+        "en": "Pool",
+        "he": "בריכה"
+      }
+    },
+    {
+      "key": "mountain",
+      "labels": {
+        "en": "Mountain",
+        "he": "הר"
+      }
+    },
+    {
+      "key": "lake",
+      "labels": {
+        "en": "Lake",
+        "he": "אגם"
+      }
+    },
+    {
+      "key": "river",
+      "labels": {
+        "en": "River",
+        "he": "נהר"
+      }
+    },
+    {
+      "key": "marina",
+      "labels": {
+        "en": "Marina",
+        "he": "מרינה"
+      }
+    },
+    {
+      "key": "forest",
+      "labels": {
+        "en": "Forest",
+        "he": "יער"
+      }
+    },
+    {
+      "key": "street",
+      "labels": {
+        "en": "Street",
+        "he": "רחוב"
+      }
+    },
+    {
+      "key": "courtyard",
+      "labels": {
+        "en": "Courtyard",
+        "he": "חצר"
+      }
+    },
+    {
+      "key": "golf_course",
+      "labels": {
+        "en": "Golf Course",
+        "he": "מגרש גולף"
+      }
+    },
+    {
+      "key": "landmark",
+      "labels": {
+        "en": "Landmark",
+        "he": "ציון דרך"
+      }
+    },
+    {
+      "key": "internal",
+      "labels": {
+        "en": "Internal",
+        "he": "פנימי"
+      }
+    }
+  ]
+}

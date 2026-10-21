@@ -1,0 +1,150 @@
+# Template merged with schema/1.4.0/reop.schema.json by tools/build-openapi.mjs.
+# Edit this file (info, servers, paths) and the JSON Schema; never the generated reop-1.4.0.yaml.
+info:
+  title: The Real Estate Open Protocol (REOP)
+  version: 1.4.0
+  summary: Open, vendor-neutral standard for exchanging off-plan and new-development real estate data.
+  description: |
+    REOP 1.4.0 is a consolidation release of the 1.3.0 model. It keeps the catalog
+    (`developers[]` / `projects[]`), the entity hierarchy, the enums and the naming of 1.3.0, and adds:
+
+    - a single-project document (`ProjectDocument`) and an availability delta (`InventoryUpdate`);
+    - shared media objects (`MediaAsset`, `FileAsset`, `ImageAsset`) and vendor-neutral `experiences[]`;
+    - one logo per entity plus credited `logos[]` on a project;
+    - unit galleries, `floorPlans[]` and `documents[]`;
+    - `rooms` and `bedrooms` as independent facts, `features` on unit models;
+    - a richer inventory unit (statuses `onHold` / `booked`, timestamps, reservation facts, external ids);
+    - `extensions` for vendor data, ISO 4217 currencies, published vocabularies.
+
+    The JSON Schema at https://reop.io/schema/1.4.0/reop.schema.json is the canonical contract;
+    this OpenAPI document is generated from it. Migration notes: migrations/1.3.0-to-1.4.0.md.
+  contact:
+    name: REOP
+    url: https://reop.io
+    email: info@reop.io
+  license:
+    name: MIT
+    url: https://github.com/REOP-IO/reop-protocol/blob/main/LICENSE
+servers:
+  - url: https://api.reop.io/v1
+    description: Reference implementation (REOP app)
+tags:
+  - name: Documents
+    description: Read REOP documents
+  - name: Inventory
+    description: Update unit availability
+  - name: Discovery
+    description: Versions, schemas and vocabularies
+paths:
+  /projects/{projectId}/reop:
+    get:
+      tags: [Documents]
+      summary: Get a project as a REOP ProjectDocument
+      operationId: getProjectDocument
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: The current ProjectDocument. The `X-REOP-Version` header carries the protocol version.
+          headers:
+            X-REOP-Version:
+              schema: { type: string, example: '1.4.0' }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ProjectDocument' }
+        '404':
+          description: Unknown or hidden project
+  /projects/{projectId}:
+    put:
+      tags: [Documents]
+      summary: Replace a project from a REOP document
+      description: |
+        Accepts a `ProjectDocument` (or a `RealEstateCatalog` with exactly one project) of any 1.x
+        version. Older minors are upgraded, newer minors are accepted with their unknown members
+        preserved. Another major version is rejected with `REOP_VERSION_UNSUPPORTED`; a document that
+        fails validation is rejected with `REOP_VALIDATION_FAILED` and a list of JSON-pointer errors.
+      operationId: putProjectDocument
+      security:
+        - apiKey: []
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - { $ref: '#/components/schemas/ProjectDocument' }
+                - { $ref: '#/components/schemas/RealEstateCatalog' }
+      responses:
+        '200': { description: Accepted and published }
+        '400': { description: Validation failed or unsupported protocol version }
+  /projects/{projectId}/inventory/updates:
+    post:
+      tags: [Inventory]
+      summary: Apply an InventoryUpdate (unit availability delta)
+      description: Partial per unit; idempotent per (id, statusUpdatedAt). Unknown unit ids are created when `links.modelId` and `unitNumber` are given.
+      operationId: postInventoryUpdate
+      security:
+        - apiKey: []
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/InventoryUpdate' }
+      responses:
+        '200':
+          description: Applied
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  updated: { type: integer }
+                  created: { type: integer }
+                  warnings: { type: array, items: { type: string } }
+        '400': { description: Validation failed }
+  /meta/reop-manifest:
+    get:
+      tags: [Discovery]
+      summary: Protocol manifest of this server
+      operationId: getManifest
+      responses:
+        '200':
+          description: Current and supported protocol versions, schema and vocabulary URLs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  protocol:
+                    type: object
+                    properties:
+                      current: { type: string, example: '1.4.0' }
+                      supportedRead: { type: array, items: { type: string }, example: ['1.3.0', '1.4.0'] }
+                      schemaUrl: { type: string, format: uri }
+                      vocabulariesUrl: { type: string, format: uri }
+  /meta/dictionary:
+    get:
+      tags: [Discovery]
+      summary: Vocabularies with labels, as served by this server
+      operationId: getDictionary
+      responses:
+        '200': { description: Vocabulary labels in the server's locales }
+components:
+  securitySchemes:
+    apiKey:
+      type: http
+      scheme: bearer
+      description: REOP API key (automation or developer scope)

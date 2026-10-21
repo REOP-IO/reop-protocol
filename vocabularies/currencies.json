@@ -1,0 +1,30 @@
+{
+  "name": "currencies",
+  "protocolVersion": "1.4.0",
+  "version": "2026-09-30",
+  "description": "Example currency codes. Any ISO 4217 code is valid in 1.4.0.",
+  "closed": false,
+  "items": [
+    {
+      "key": "ILS",
+      "labels": {
+        "en": "ILS",
+        "he": "שקל"
+      }
+    },
+    {
+      "key": "USD",
+      "labels": {
+        "en": "USD",
+        "he": "דולר"
+      }
+    },
+    {
+      "key": "EUR",
+      "labels": {
+        "en": "EUR",
+        "he": "אירו"
+      }
+    }
+  ]
+}
