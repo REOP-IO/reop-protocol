@@ -1,0 +1,90 @@
+{
+  "name": "unitStatuses",
+  "protocolVersion": "1.4.0",
+  "version": "2026-09-30",
+  "description": "Inventory unit statuses. 1.3.0 values: available, reserved, sold, notForSale. 1.4.0 adds onHold and booked. Only available is buyer-available.",
+  "closed": true,
+  "transitions": {
+    "available": [
+      "onHold",
+      "reserved",
+      "notForSale"
+    ],
+    "onHold": [
+      "available",
+      "reserved",
+      "notForSale"
+    ],
+    "reserved": [
+      "available",
+      "onHold",
+      "booked",
+      "notForSale"
+    ],
+    "booked": [
+      "sold",
+      "reserved",
+      "notForSale"
+    ],
+    "sold": [],
+    "notForSale": [
+      "available"
+    ]
+  },
+  "items": [
+    {
+      "key": "available",
+      "labels": {
+        "en": "Available",
+        "he": "זמין"
+      },
+      "buyerAvailable": true,
+      "description": "For sale now."
+    },
+    {
+      "key": "onHold",
+      "labels": {
+        "en": "On hold",
+        "he": "בהקפאה"
+      },
+      "buyerAvailable": false,
+      "description": "Temporarily withheld by the developer."
+    },
+    {
+      "key": "reserved",
+      "labels": {
+        "en": "Reserved",
+        "he": "שמור"
+      },
+      "buyerAvailable": false,
+      "description": "Held by a buyer, not yet contracted."
+    },
+    {
+      "key": "booked",
+      "labels": {
+        "en": "Booked",
+        "he": "מוזמן"
+      },
+      "buyerAvailable": false,
+      "description": "Contract signed, not yet sold or registered."
+    },
+    {
+      "key": "sold",
+      "labels": {
+        "en": "Sold",
+        "he": "נמכר"
+      },
+      "buyerAvailable": false,
+      "description": "Sold."
+    },
+    {
+      "key": "notForSale",
+      "labels": {
+        "en": "Not for sale",
+        "he": "לא למכירה"
+      },
+      "buyerAvailable": false,
+      "description": "Not offered."
+    }
+  ]
+}

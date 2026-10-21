@@ -1,0 +1,9 @@
+{
+  "protocol": { "name": "REOP", "version": "1.4.0", "generatedAt": "2026-10-21T12:00:00Z", "generator": "developer-erp/4.2" },
+  "projectId": "prj_rothschild_collection",
+  "updates": [
+    { "id": "u_roth_1502", "status": "booked", "statusUpdatedAt": "2026-10-21T11:58:00Z", "reservation": { "reference": "CRM-88213" } },
+    { "id": "u_roth_1503", "status": "available", "statusUpdatedAt": "2026-10-21T11:58:00Z", "price": { "amount": 9450000, "currency": "ILS" }, "priceUpdatedAt": "2026-10-21T11:58:00Z" },
+    { "id": "u_roth_1601", "unitNumber": "1601", "links": { "modelId": "model_roth_2br", "buildingId": "bldg_glass_tower" }, "floorNumber": 16, "status": "available", "statusUpdatedAt": "2026-10-21T11:58:00Z", "price": { "amount": 9700000, "currency": "ILS" }, "externalIds": { "erp": "RC-1601" } }
+  ]
+}

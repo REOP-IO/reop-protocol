@@ -1,0 +1,51 @@
+{
+  "name": "projectStatusStates",
+  "protocolVersion": "1.4.0",
+  "version": "2026-09-30",
+  "description": "Project status states (1.3.0, unchanged).",
+  "closed": true,
+  "items": [
+    {
+      "key": "planning",
+      "labels": {
+        "en": "Planning",
+        "he": "תכנון"
+      }
+    },
+    {
+      "key": "presale",
+      "labels": {
+        "en": "Presale",
+        "he": "טרום מכירה"
+      }
+    },
+    {
+      "key": "underConstruction",
+      "labels": {
+        "en": "Under Construction",
+        "he": "בבנייה"
+      }
+    },
+    {
+      "key": "completed",
+      "labels": {
+        "en": "Completed",
+        "he": "הושלם"
+      }
+    },
+    {
+      "key": "onHold",
+      "labels": {
+        "en": "On Hold",
+        "he": "בהקפאה"
+      }
+    },
+    {
+      "key": "cancelled",
+      "labels": {
+        "en": "Cancelled",
+        "he": "בוטל"
+      }
+    }
+  ]
+}

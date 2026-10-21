@@ -1,0 +1,51 @@
+{
+  "name": "projectTypes",
+  "protocolVersion": "1.4.0",
+  "version": "2026-09-30",
+  "description": "Project types (1.3.0, unchanged).",
+  "closed": true,
+  "items": [
+    {
+      "key": "luxury",
+      "labels": {
+        "en": "Luxury",
+        "he": "יוקרה"
+      }
+    },
+    {
+      "key": "investment",
+      "labels": {
+        "en": "Investment",
+        "he": "השקעה"
+      }
+    },
+    {
+      "key": "mixedUse",
+      "labels": {
+        "en": "Mixed Use",
+        "he": "שימוש מעורב"
+      }
+    },
+    {
+      "key": "affordable",
+      "labels": {
+        "en": "Affordable",
+        "he": "דיור בר השגה"
+      }
+    },
+    {
+      "key": "commercial",
+      "labels": {
+        "en": "Commercial",
+        "he": "מסחרי"
+      }
+    },
+    {
+      "key": "residential",
+      "labels": {
+        "en": "Residential",
+        "he": "מגורים"
+      }
+    }
+  ]
+}

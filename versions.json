@@ -1,0 +1,52 @@
+{
+  "$comment": "Machine-readable index of REOP releases. Consumers, the reop.io site and the REOP app CI read this file. `current` is the version new documents MUST declare; `supported` versions are still accepted by readers of the same major; `deprecated` versions have a published migration path.",
+  "current": "1.4.0",
+  "schemaBaseUrl": "https://reop.io/schema/",
+  "versions": [
+    {
+      "version": "1.4.0",
+      "status": "current",
+      "released": null,
+      "schema": "schema/1.4.0/reop.schema.json",
+      "schemaDialect": "https://json-schema.org/draft/2020-12/schema",
+      "openapi": "specifications/reop-1.4.0.yaml",
+      "examples": "examples/1.4.0",
+      "vocabularies": "vocabularies",
+      "migrationFrom": { "1.3.0": "migrations/1.3.0-to-1.4.0.md" },
+      "documents": ["RealEstateCatalog", "ProjectDocument", "InventoryUpdate"],
+      "notes": "Consolidation release: ProjectDocument and InventoryUpdate documents, MediaAsset / FileAsset / Experience objects, one logo plus credited logos, unit galleries and floor plans, rooms and bedrooms as independent facts, extended inventory, entity-specific marketing, extensions, published vocabularies, ISO 4217 currencies."
+    },
+    {
+      "version": "1.3.0",
+      "status": "supported",
+      "released": "2026-04-17",
+      "schema": "specifications/reop-v1.3.0-schema.json",
+      "schemaDialect": "http://json-schema.org/draft-07/schema#",
+      "openapi": "specifications/reop-1.3.0.yaml",
+      "examples": "examples/1.3.0",
+      "documents": ["RealEstateCatalog"],
+      "notes": "Extended language support: LocalizedString everywhere, 11 contact channels, 12 social networks, enums for amenities, interests, views and orientations. Known drift: the JSON Schema omits members the YAML defines (contact channels beyond whatsapp, social networks beyond linkedin, gardenAreaSqm, Unit.startingPrice, Floor.number required). The YAML is authoritative for 1.3.0; both files are frozen."
+    },
+    {
+      "version": "1.2.0",
+      "status": "deprecated",
+      "released": "2025-12-17",
+      "schema": "specifications/reop-v1.2.0-schema.json",
+      "schemaDialect": "http://json-schema.org/draft-07/schema#",
+      "openapi": "specifications/reop-1.2.0.yaml",
+      "examples": "examples/1.2.0",
+      "documents": ["RealEstateCatalog"],
+      "notes": "Flattened architecture: developers[] and projects[] linked by ids (many-to-many)."
+    },
+    {
+      "version": "1.1.0",
+      "status": "deprecated",
+      "released": "2025-12-04",
+      "schema": null,
+      "openapi": "specifications/reop-v1.1.0.yaml",
+      "examples": "examples/1.1.0",
+      "documents": ["nested project"],
+      "notes": "Nested hierarchy Developer > Project > Building > Floor > UnitModel > Unit; decoupled inventory; multi-language; marketing and legal layers; standardized enums."
+    }
+  ]
+}

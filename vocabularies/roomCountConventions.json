@@ -1,0 +1,106 @@
+{
+  "name": "roomCountConventions",
+  "protocolVersion": "1.4.0",
+  "version": "2026-09-30",
+  "description": "How markets count rooms. Defines what UnitSpecs.rooms means for a given location.countryCode (always the number a local listing prints) and gives operators a default presentation convention. Informative.",
+  "closed": false,
+  "defaultConvention": "bedrooms",
+  "items": [
+    {
+      "key": "IL",
+      "convention": "rooms",
+      "labels": {
+        "en": "Israel"
+      },
+      "description": "Advertised rooms include the living room; half rooms (0.5) are common; a studio is advertised as one room or as a studio."
+    },
+    {
+      "key": "DE",
+      "convention": "rooms",
+      "labels": {
+        "en": "Germany"
+      },
+      "description": "Zimmer counts living and sleeping rooms, half rooms for small rooms; kitchen and bathrooms excluded."
+    },
+    {
+      "key": "CH",
+      "convention": "rooms",
+      "labels": {
+        "en": "Switzerland"
+      },
+      "description": "Zimmer as in Germany; half rooms for dining nooks or small rooms."
+    },
+    {
+      "key": "AT",
+      "convention": "rooms",
+      "labels": {
+        "en": "Austria"
+      },
+      "description": "Zimmer counts living and sleeping rooms."
+    },
+    {
+      "key": "FR",
+      "convention": "rooms",
+      "labels": {
+        "en": "France"
+      },
+      "description": "Pieces count living and sleeping rooms, kitchen and bathrooms excluded (T3 = two bedrooms plus a living room)."
+    },
+    {
+      "key": "IT",
+      "convention": "rooms",
+      "labels": {
+        "en": "Italy"
+      },
+      "description": "Locali count habitable rooms; a separate kitchen is often counted."
+    },
+    {
+      "key": "NL",
+      "convention": "rooms",
+      "labels": {
+        "en": "Netherlands"
+      },
+      "description": "Kamers count living and sleeping rooms."
+    },
+    {
+      "key": "US",
+      "convention": "bedrooms",
+      "labels": {
+        "en": "United States"
+      },
+      "description": "Listings state bedrooms and bathrooms (3 BR / 2 BA)."
+    },
+    {
+      "key": "GB",
+      "convention": "bedrooms",
+      "labels": {
+        "en": "United Kingdom"
+      },
+      "description": "Listings state bedrooms."
+    },
+    {
+      "key": "AE",
+      "convention": "bedrooms",
+      "labels": {
+        "en": "United Arab Emirates"
+      },
+      "description": "Listings state bedrooms (studio, 1BR, 2BR)."
+    },
+    {
+      "key": "ES",
+      "convention": "bedrooms",
+      "labels": {
+        "en": "Spain"
+      },
+      "description": "Habitaciones usually means bedrooms on portals."
+    },
+    {
+      "key": "PT",
+      "convention": "bedrooms",
+      "labels": {
+        "en": "Portugal"
+      },
+      "description": "The tipologia counts bedrooms (T2 = two bedrooms)."
+    }
+  ]
+}

@@ -1,0 +1,1406 @@
+# GENERATED FILE - do not edit by hand.
+# Source: schema/1.4.0/reop.schema.json (canonical JSON Schema) + specifications/openapi-1.4.0.template.yaml
+# Rebuild: npm run build:openapi
+openapi: 3.1.0
+info:
+  title: The Real Estate Open Protocol (REOP)
+  version: 1.4.0
+  summary: Open, vendor-neutral standard for exchanging off-plan and new-development real estate data.
+  description: |
+    REOP 1.4.0 is a consolidation release of the 1.3.0 model. It keeps the catalog
+    (`developers[]` / `projects[]`), the entity hierarchy, the enums and the naming of 1.3.0, and adds:
+
+    - a single-project document (`ProjectDocument`) and an availability delta (`InventoryUpdate`);
+    - shared media objects (`MediaAsset`, `FileAsset`, `ImageAsset`) and vendor-neutral `experiences[]`;
+    - one logo per entity plus credited `logos[]` on a project;
+    - unit galleries, `floorPlans[]` and `documents[]`;
+    - `rooms` and `bedrooms` as independent facts, `features` on unit models;
+    - a richer inventory unit (statuses `onHold` / `booked`, timestamps, reservation facts, external ids);
+    - `extensions` for vendor data, ISO 4217 currencies, published vocabularies.
+
+    The JSON Schema at https://reop.io/schema/1.4.0/reop.schema.json is the canonical contract;
+    this OpenAPI document is generated from it. Migration notes: migrations/1.3.0-to-1.4.0.md.
+  contact:
+    name: REOP
+    url: https://reop.io
+    email: info@reop.io
+  license:
+    name: MIT
+    url: https://github.com/REOP-IO/reop-protocol/blob/main/LICENSE
+servers:
+  - url: https://api.reop.io/v1
+    description: Reference implementation (REOP app)
+tags:
+  - name: Documents
+    description: Read REOP documents
+  - name: Inventory
+    description: Update unit availability
+  - name: Discovery
+    description: Versions, schemas and vocabularies
+paths:
+  /projects/{projectId}/reop:
+    get:
+      tags:
+        - Documents
+      summary: Get a project as a REOP ProjectDocument
+      operationId: getProjectDocument
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The current ProjectDocument. The `X-REOP-Version` header carries the protocol version.
+          headers:
+            X-REOP-Version:
+              schema:
+                type: string
+                example: 1.4.0
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProjectDocument"
+        "404":
+          description: Unknown or hidden project
+  /projects/{projectId}:
+    put:
+      tags:
+        - Documents
+      summary: Replace a project from a REOP document
+      description: |
+        Accepts a `ProjectDocument` (or a `RealEstateCatalog` with exactly one project) of any 1.x
+        version. Older minors are upgraded, newer minors are accepted with their unknown members
+        preserved. Another major version is rejected with `REOP_VERSION_UNSUPPORTED`; a document that
+        fails validation is rejected with `REOP_VALIDATION_FAILED` and a list of JSON-pointer errors.
+      operationId: putProjectDocument
+      security:
+        - apiKey: []
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: "#/components/schemas/ProjectDocument"
+                - $ref: "#/components/schemas/RealEstateCatalog"
+      responses:
+        "200":
+          description: Accepted and published
+        "400":
+          description: Validation failed or unsupported protocol version
+  /projects/{projectId}/inventory/updates:
+    post:
+      tags:
+        - Inventory
+      summary: Apply an InventoryUpdate (unit availability delta)
+      description: Partial per unit; idempotent per (id, statusUpdatedAt). Unknown unit ids are created when `links.modelId` and `unitNumber` are given.
+      operationId: postInventoryUpdate
+      security:
+        - apiKey: []
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InventoryUpdate"
+      responses:
+        "200":
+          description: Applied
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  updated:
+                    type: integer
+                  created:
+                    type: integer
+                  warnings:
+                    type: array
+                    items:
+                      type: string
+        "400":
+          description: Validation failed
+  /meta/reop-manifest:
+    get:
+      tags:
+        - Discovery
+      summary: Protocol manifest of this server
+      operationId: getManifest
+      responses:
+        "200":
+          description: Current and supported protocol versions, schema and vocabulary URLs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  protocol:
+                    type: object
+                    properties:
+                      current:
+                        type: string
+                        example: 1.4.0
+                      supportedRead:
+                        type: array
+                        items:
+                          type: string
+                        example:
+                          - 1.3.0
+                          - 1.4.0
+                      schemaUrl:
+                        type: string
+                        format: uri
+                      vocabulariesUrl:
+                        type: string
+                        format: uri
+  /meta/dictionary:
+    get:
+      tags:
+        - Discovery
+      summary: Vocabularies with labels, as served by this server
+      operationId: getDictionary
+      responses:
+        "200":
+          description: Vocabulary labels in the server's locales
+components:
+  securitySchemes:
+    apiKey:
+      type: http
+      scheme: bearer
+      description: REOP API key (automation or developer scope)
+  schemas:
+    Protocol:
+      type: object
+      description: Version declaration. Required on every document. Consumers accept any document of the same major version; unknown members of a newer minor are preserved and ignored.
+      required:
+        - version
+      properties:
+        name:
+          type: string
+          description: Protocol name. Producers SHOULD write "REOP".
+          default: REOP
+        version:
+          type: string
+          const: 1.4.0
+          description: Semantic version of this schema.
+        generatedAt:
+          type: string
+          format: date-time
+          description: When the document was produced (RFC 3339).
+        generator:
+          type: string
+          description: Free text naming the producing system, e.g. "reop-app/2026.10".
+        defaultLocale:
+          $ref: "#/components/schemas/LocaleCode"
+          description: Locale a lenient reader assigns to a plain string found in a LocalizedString position. Optional; `en` when absent.
+        domain:
+          type: string
+          deprecated: true
+          x-replacedBy: generator
+          description: "Deprecated since 1.4.0: use `generator`."
+    LocaleCode:
+      type: string
+      pattern: ^[a-z]{2,3}(-[A-Za-z0-9]{2,8})*$
+      description: BCP 47 language tag; two-letter ISO 639-1 codes preferred (en, he, ar, fr).
+    LocalizedString:
+      type: object
+      description: "Map of locale code to text. A producer SHOULD provide at least one locale. Consumer fallback: requested locale, then `en`, then the first non-empty value. Missing translations may be omitted or set to null."
+      propertyNames:
+        $ref: "#/components/schemas/LocaleCode"
+      additionalProperties:
+        type:
+          - string
+          - "null"
+    Id:
+      type: string
+      minLength: 1
+      maxLength: 128
+      pattern: ^[A-Za-z0-9][A-Za-z0-9_.:-]*$
+      description: "Opaque identifier, unique within the document per entity type and stable across revisions of the same project. Recommended prefixes: dev_, prj_, um_, bld_, flr_, unit_, poi_."
+    Url:
+      type: string
+      format: uri
+      pattern: ^https?://
+      description: Absolute http(s) URL.
+    Money:
+      type: object
+      required:
+        - amount
+        - currency
+      properties:
+        amount:
+          type: number
+          minimum: 0
+          description: Amount in major units of the currency (never a string).
+        currency:
+          type: string
+          pattern: ^[A-Z]{3}$
+          description: ISO 4217 code, e.g. ILS, USD, EUR. (1.3.0 restricted this to ILS, USD and EUR; 1.4.0 accepts any ISO 4217 code.)
+    PriceRange:
+      type: object
+      description: Lowest and highest price of a set of units.
+      properties:
+        min:
+          $ref: "#/components/schemas/Money"
+        max:
+          $ref: "#/components/schemas/Money"
+    Coordinates:
+      type: object
+      required:
+        - lat
+        - lng
+      properties:
+        lat:
+          type: number
+          minimum: -90
+          maximum: 90
+        lng:
+          type: number
+          minimum: -180
+          maximum: 180
+    Location:
+      type: object
+      description: Postal and geographic location. `countryCode` is required when coordinates are given.
+      properties:
+        address:
+          $ref: "#/components/schemas/LocalizedString"
+        city:
+          $ref: "#/components/schemas/LocalizedString"
+        district:
+          $ref: "#/components/schemas/LocalizedString"
+        postalCode:
+          type: string
+        countryCode:
+          type: string
+          pattern: ^[A-Z]{2}$
+          description: ISO 3166-1 alpha-2 (IL, US, DE). Also identifies the market whose room-count convention applies to `UnitSpecs.rooms`.
+        coordinates:
+          $ref: "#/components/schemas/Coordinates"
+      dependentRequired:
+        coordinates:
+          - countryCode
+    ContactInfo:
+      type: object
+      description: Standardized contact methods (unchanged from 1.3.0).
+      properties:
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        mobile:
+          type: string
+        fax:
+          type: string
+        whatsapp:
+          type: string
+        telegram:
+          type: string
+        wechat:
+          type: string
+        line:
+          type: string
+        signal:
+          type: string
+        messenger:
+          type: string
+        website:
+          $ref: "#/components/schemas/Url"
+    SocialInfo:
+      type: object
+      description: Links to official social profiles. The listed networks are the recommended keys; any other network may be added as an additional key whose value is a URL.
+      properties:
+        facebook:
+          $ref: "#/components/schemas/Url"
+        instagram:
+          $ref: "#/components/schemas/Url"
+        linkedin:
+          $ref: "#/components/schemas/Url"
+        twitter:
+          $ref: "#/components/schemas/Url"
+        youtube:
+          $ref: "#/components/schemas/Url"
+        tiktok:
+          $ref: "#/components/schemas/Url"
+        pinterest:
+          $ref: "#/components/schemas/Url"
+        snapchat:
+          $ref: "#/components/schemas/Url"
+        vimeo:
+          $ref: "#/components/schemas/Url"
+        discord:
+          $ref: "#/components/schemas/Url"
+        reddit:
+          $ref: "#/components/schemas/Url"
+        github:
+          $ref: "#/components/schemas/Url"
+        telegram:
+          $ref: "#/components/schemas/Url"
+      additionalProperties:
+        $ref: "#/components/schemas/Url"
+    Extensions:
+      type: object
+      description: Vendor or application specific data that is not part of the protocol, keyed by a vendor key (reverse domain or product name). Consumers ignore keys they do not know; intermediaries preserve them.
+      additionalProperties:
+        type: object
+    MediaType:
+      type: string
+      enum:
+        - image
+        - video
+        - document
+        - model3d
+        - other
+    MediaAsset:
+      type: object
+      description: One media reference. The 1.3.0 gallery item `{ type, url }` is a valid MediaAsset.
+      required:
+        - url
+      properties:
+        url:
+          $ref: "#/components/schemas/Url"
+        type:
+          $ref: "#/components/schemas/MediaType"
+          default: image
+        mimeType:
+          type: string
+          pattern: ^[-\w.+]+/[-\w.+]+$
+        fileName:
+          type: string
+          description: Suggested file name for downloads.
+        title:
+          $ref: "#/components/schemas/LocalizedString"
+        alt:
+          $ref: "#/components/schemas/LocalizedString"
+          description: Alternative text for images.
+        caption:
+          $ref: "#/components/schemas/LocalizedString"
+        width:
+          type: integer
+          minimum: 1
+        height:
+          type: integer
+          minimum: 1
+        sizeBytes:
+          type: integer
+          minimum: 0
+        previewUrl:
+          $ref: "#/components/schemas/Url"
+          description: An image to show when `url` is not directly renderable (PDF, CAD, video poster).
+        role:
+          type: string
+          description: Open string describing the asset's purpose, e.g. hero, plan, sitePlan, blueprint, brochure, priceList. See vocabularies/documentRoles.json.
+        extensions:
+          $ref: "#/components/schemas/Extensions"
+    FileAsset:
+      description: A downloadable file (floor plan, document). `format` is the lower-case file extension and is open so new formats need no schema change (pdf, dwg, dxf, png, jpg, svg, ifc, rvt, skp).
+      allOf:
+        - $ref: "#/components/schemas/MediaAsset"
+        - type: object
+          properties:
+            format:
+              type: string
+              pattern: ^[a-z0-9]{1,8}$
+    ImageAsset:
+      description: An image reference (logos). Same shape as MediaAsset with `type` fixed to image.
+      allOf:
+        - $ref: "#/components/schemas/MediaAsset"
+        - type: object
+          properties:
+            type:
+              const: image
+    CreditedLogo:
+      description: A logo shown on a project with its credit (developer, partner, architect, bank).
+      allOf:
+        - $ref: "#/components/schemas/ImageAsset"
+        - type: object
+          properties:
+            role:
+              type: string
+              description: "Recommended: developer, partner, architect, bank, other."
+    ExperienceFloor:
+      type: object
+      required:
+        - index
+      properties:
+        index:
+          type: integer
+          minimum: 0
+        title:
+          $ref: "#/components/schemas/LocalizedString"
+        imageUrl:
+          $ref: "#/components/schemas/Url"
+          description: Top view or floor render.
+        dollhouseImageUrl:
+          $ref: "#/components/schemas/Url"
+    Experience:
+      type: object
+      description: "An interactive or immersive presentation: virtual tour, dollhouse, 3D model, 360 video, AR. Vendor neutral: `type` and `provider` are open strings with recommended vocabularies; vendor specifics go under `providerData`."
+      required:
+        - type
+        - url
+      properties:
+        id:
+          $ref: "#/components/schemas/Id"
+        type:
+          type: string
+          description: "Recommended: virtualTour, dollhouse, model3d, video360, ar, walkthrough, other. See vocabularies/experienceTypes.json."
+        provider:
+          type: string
+          pattern: ^[a-z0-9][a-z0-9._-]*$
+          description: Lower-case vendor key, e.g. 3destate, matterport. See vocabularies/experienceProviders.json.
+        title:
+          $ref: "#/components/schemas/LocalizedString"
+        url:
+          $ref: "#/components/schemas/Url"
+          description: "What a consumer opens: the player or viewer page."
+        embed:
+          type: object
+          required:
+            - kind
+            - url
+          properties:
+            kind:
+              type: string
+              enum:
+                - iframe
+                - script
+                - link
+            url:
+              $ref: "#/components/schemas/Url"
+            params:
+              type: object
+              additionalProperties:
+                type:
+                  - string
+                  - number
+                  - boolean
+        previewUrl:
+          $ref: "#/components/schemas/Url"
+          description: Still image to show before the experience loads.
+        floors:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExperienceFloor"
+        providerData:
+          type: object
+          description: Opaque vendor metadata; never required by consumers.
+        extensions:
+          $ref: "#/components/schemas/Extensions"
+    MarketingCommon:
+      type: object
+      description: Members every marketing object may carry. Entity-specific objects below list which further members apply.
+      properties:
+        logo:
+          description: "The entity's own logo as an ImageAsset (replaces the 1.3.0 `{ square, landscape }` pair; consumers fit whatever aspect ratio is supplied). The 1.3.0 pair is still accepted in 1.4.0 but deprecated: upgrade rule url = square, else landscape."
+          anyOf:
+            - $ref: "#/components/schemas/ImageAsset"
+            - type: object
+              deprecated: true
+              x-replacedBy: logo.url
+              properties:
+                square:
+                  type: string
+                landscape:
+                  type: string
+              not:
+                required:
+                  - url
+        website:
+          $ref: "#/components/schemas/Url"
+        social:
+          $ref: "#/components/schemas/SocialInfo"
+        startingPrice:
+          $ref: "#/components/schemas/Money"
+        priceRange:
+          $ref: "#/components/schemas/PriceRange"
+        heroImage:
+          $ref: "#/components/schemas/Url"
+          description: Primary image. SHOULD be the url of one `gallery` item; absent means the first gallery image.
+        gallery:
+          type: array
+          items:
+            $ref: "#/components/schemas/MediaAsset"
+          description: Images and videos in presentation order.
+        floorPlans:
+          type: array
+          items:
+            $ref: "#/components/schemas/FileAsset"
+          description: Plans in presentation order; `previewUrl` for non-image files, `role` sitePlan / plan / blueprint.
+        experiences:
+          type: array
+          items:
+            $ref: "#/components/schemas/Experience"
+        documents:
+          type: array
+          items:
+            $ref: "#/components/schemas/FileAsset"
+          description: Other downloadable files with a `role` (brochure, priceList, specification, legal, other).
+        brochurePdf:
+          $ref: "#/components/schemas/Url"
+          description: The brochure. Kept from 1.3.0; `documents[]` is the extensible form.
+        projectUrl:
+          $ref: "#/components/schemas/Url"
+          description: Canonical public page of the project.
+        layoutImage:
+          $ref: "#/components/schemas/Url"
+          deprecated: true
+          x-replacedBy: floorPlans[]
+          description: "Deprecated since 1.4.0: first entry of `floorPlans[]`."
+        blueprint:
+          $ref: "#/components/schemas/Url"
+          deprecated: true
+          x-replacedBy: floorPlans[] with role blueprint
+        extensions:
+          $ref: "#/components/schemas/Extensions"
+    DeveloperMarketing:
+      description: "Applies to a developer: logo, website, social, documents. Price, hero image, gallery, plans, experiences and project URLs do not apply to a developer and are deprecated here."
+      allOf:
+        - $ref: "#/components/schemas/MarketingCommon"
+      x-applicable:
+        - logo
+        - website
+        - social
+        - documents
+      x-deprecatedHere:
+        - startingPrice
+        - priceRange
+        - heroImage
+        - gallery
+        - floorPlans
+        - experiences
+        - brochurePdf
+        - projectUrl
+        - layoutImage
+        - blueprint
+    ProjectMarketing:
+      description: "Applies to a project: every common member plus credited logos."
+      allOf:
+        - $ref: "#/components/schemas/MarketingCommon"
+        - type: object
+          properties:
+            logos:
+              type: array
+              items:
+                $ref: "#/components/schemas/CreditedLogo"
+              description: Logos credited on the project (developer, partners, architect, bank) in presentation order.
+      x-applicable:
+        - logo
+        - logos
+        - website
+        - social
+        - startingPrice
+        - priceRange
+        - heroImage
+        - gallery
+        - floorPlans
+        - experiences
+        - documents
+        - brochurePdf
+        - projectUrl
+    BuildingMarketing:
+      description: "Applies to a building: logo, startingPrice, heroImage, gallery, floorPlans (typical floor), experiences."
+      allOf:
+        - $ref: "#/components/schemas/MarketingCommon"
+      x-applicable:
+        - logo
+        - startingPrice
+        - heroImage
+        - gallery
+        - floorPlans
+        - experiences
+      x-deprecatedHere:
+        - website
+        - social
+        - priceRange
+        - documents
+        - brochurePdf
+        - projectUrl
+        - layoutImage
+        - blueprint
+    FloorMarketing:
+      description: "Applies to a floor: startingPrice, heroImage, gallery, floorPlans."
+      allOf:
+        - $ref: "#/components/schemas/MarketingCommon"
+      x-applicable:
+        - startingPrice
+        - heroImage
+        - gallery
+        - floorPlans
+      x-deprecatedHere:
+        - logo
+        - website
+        - social
+        - priceRange
+        - experiences
+        - documents
+        - brochurePdf
+        - projectUrl
+        - layoutImage
+        - blueprint
+    UnitModelMarketing:
+      description: "Applies to a unit model: startingPrice, priceRange, heroImage, gallery (all images and videos of the type), floorPlans, experiences."
+      allOf:
+        - $ref: "#/components/schemas/MarketingCommon"
+      x-applicable:
+        - startingPrice
+        - priceRange
+        - heroImage
+        - gallery
+        - floorPlans
+        - experiences
+      x-deprecatedHere:
+        - logo
+        - website
+        - social
+        - documents
+        - brochurePdf
+        - projectUrl
+        - layoutImage
+        - blueprint
+    UnitMarketing:
+      description: "Applies to an inventory unit: media specific to that unit (gallery, floorPlans, experiences)."
+      allOf:
+        - $ref: "#/components/schemas/MarketingCommon"
+      x-applicable:
+        - heroImage
+        - gallery
+        - floorPlans
+        - experiences
+      x-deprecatedHere:
+        - logo
+        - website
+        - social
+        - startingPrice
+        - priceRange
+        - documents
+        - brochurePdf
+        - projectUrl
+        - layoutImage
+        - blueprint
+    ProjectType:
+      type: string
+      enum:
+        - luxury
+        - investment
+        - mixedUse
+        - affordable
+        - commercial
+        - residential
+    ProjectState:
+      type: string
+      enum:
+        - planning
+        - presale
+        - underConstruction
+        - completed
+        - onHold
+        - cancelled
+    ProjectStatus:
+      type: object
+      required:
+        - state
+      properties:
+        state:
+          $ref: "#/components/schemas/ProjectState"
+        phase:
+          type: string
+          description: Open string naming the construction phase (e.g. excavation, structural_frame, finishing).
+        progressPercentage:
+          type: number
+          minimum: 0
+          maximum: 100
+        startDate:
+          type: string
+          format: date
+          description: Construction start (new in 1.4.0).
+        completionDate:
+          type: string
+          format: date
+          description: Expected or actual construction completion (new in 1.4.0).
+        handoverDate:
+          type: string
+          format: date
+    PaymentInstallment:
+      type: object
+      description: One stage of a payment plan. `phase` is the 1.3.0 machine key; `title` is the human label (new). A stage is triggered either by `dueDate` or by `milestone`.
+      properties:
+        id:
+          $ref: "#/components/schemas/Id"
+        phase:
+          type: string
+          description: Machine key such as signing, foundation, shell_completion, handover. See vocabularies/paymentPhases.json.
+        title:
+          $ref: "#/components/schemas/LocalizedString"
+          description: Human label of the stage.
+        percentage:
+          type: number
+          minimum: 0
+          maximum: 100
+        amount:
+          $ref: "#/components/schemas/Money"
+        dueDate:
+          type: string
+          format: date
+        milestone:
+          $ref: "#/components/schemas/LocalizedString"
+          description: The event that triggers the payment when there is no due date (e.g. "on key handover").
+        description:
+          $ref: "#/components/schemas/LocalizedString"
+    PaymentPlan:
+      type: object
+      properties:
+        currency:
+          type: string
+          pattern: ^[A-Z]{3}$
+        totalPrice:
+          $ref: "#/components/schemas/Money"
+        installments:
+          type: array
+          items:
+            $ref: "#/components/schemas/PaymentInstallment"
+    LegalInfo:
+      type: object
+      properties:
+        permitNumber:
+          type: string
+        escrowBank:
+          type: string
+        projectBankAccountId:
+          type: string
+        lawyer:
+          type: string
+    AmenityCost:
+      type: string
+      enum:
+        - included
+        - paid
+        - common
+        - private
+    AmenityKey:
+      type: string
+      enum:
+        - airConditioning
+        - heating
+        - centralHeating
+        - underfloorHeating
+        - elevator
+        - freightElevator
+        - shabbatElevator
+        - parking
+        - undergroundParking
+        - coveredParking
+        - robotParking
+        - guestParking
+        - evCharging
+        - storage
+        - bicycleStorage
+        - strollerRoom
+        - balcony
+        - terrace
+        - privateGarden
+        - roofDeck
+        - pool
+        - infinityPool
+        - heatedPool
+        - kidsPool
+        - indoorPool
+        - jacuzzi
+        - sauna
+        - steamRoom
+        - spa
+        - gym
+        - yogaStudio
+        - tennisCourt
+        - squashCourt
+        - basketballCourt
+        - paddleCourt
+        - runningTrack
+        - playground
+        - kidsClub
+        - gameRoom
+        - cinema
+        - library
+        - coworkingSpace
+        - conferenceRoom
+        - lounge
+        - partyRoom
+        - bbqArea
+        - outdoorKitchen
+        - doorman
+        - concierge
+        - securitySystem
+        - cctv
+        - intercom
+        - videoIntercom
+        - keylessEntry
+        - smartHome
+        - generator
+        - solarPanels
+        - waterTank
+        - accessibility
+        - wheelchairAccessible
+        - furnished
+        - partiallyFurnished
+        - kitchenIsland
+        - walkInCloset
+        - safeRoom
+        - highCeilings
+        - doubleGlazing
+        - parquetFlooring
+        - marbleFlooring
+        - fireplace
+        - dishwasher
+        - washingMachine
+        - dryer
+        - microwave
+        - refrigerator
+        - wineCellar
+        - petsAllowed
+        - smokingAllowed
+        - cleaningService
+        - laundryService
+        - shuttleService
+        - maintenanceOnSite
+    AmenityItem:
+      type: object
+      description: "`name` is a key of vocabularies/amenities.json (the 1.3.0 AmenityEnum, unchanged). A custom amenity uses a slug that is not in the vocabulary and MUST carry `label`."
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          pattern: ^[A-Za-z0-9][A-Za-z0-9_-]*$
+        label:
+          $ref: "#/components/schemas/LocalizedString"
+          description: Human label; required for custom amenities, ignored for vocabulary keys.
+        cost:
+          $ref: "#/components/schemas/AmenityCost"
+        category:
+          type: string
+          enum:
+            - unit
+            - building
+            - parking
+            - recreation
+            - services
+            - security
+            - rules
+      if:
+        properties:
+          name:
+            $ref: "#/components/schemas/AmenityKey"
+      then: {}
+      else:
+        required:
+          - label
+    InterestItem:
+      type: object
+      description: Point of interest near the project. `type` SHOULD be a key of vocabularies/interests.json (the 1.3.0 InterestEnum); other values are allowed.
+      required:
+        - name
+      properties:
+        id:
+          $ref: "#/components/schemas/Id"
+        name:
+          $ref: "#/components/schemas/LocalizedString"
+        type:
+          type: string
+          pattern: ^[A-Za-z0-9][A-Za-z0-9_-]*$
+        distanceMeters:
+          type: integer
+          minimum: 0
+        coordinates:
+          $ref: "#/components/schemas/Coordinates"
+        showOnMap:
+          type: boolean
+          default: true
+          description: Whether a map consumer should pin this point.
+        description:
+          $ref: "#/components/schemas/LocalizedString"
+    Orientation:
+      type: string
+      enum:
+        - north
+        - south
+        - east
+        - west
+        - northEast
+        - northWest
+        - southEast
+        - southWest
+    View:
+      type: string
+      enum:
+        - sea_full
+        - sea_partial
+        - city
+        - park
+        - garden
+        - pool
+        - mountain
+        - lake
+        - river
+        - marina
+        - forest
+        - street
+        - courtyard
+        - golf_course
+        - landmark
+        - internal
+    UnitFeatures:
+      type: object
+      description: Physical features of a unit or unit type (the 1.3.0 inventory `features`, now also allowed on unit models).
+      properties:
+        orientation:
+          type: array
+          items:
+            $ref: "#/components/schemas/Orientation"
+          uniqueItems: true
+        view:
+          $ref: "#/components/schemas/View"
+        tags:
+          type: array
+          items:
+            type: string
+          description: Free tags (highCeilings, premiumFinish, privateElevator).
+    UnitSpecs:
+      type: object
+      description: "Room counts and areas. `rooms` and `bedrooms` are independent facts: store what the source states, never derive one from the other."
+      properties:
+        rooms:
+          type: number
+          exclusiveMinimum: 0
+          multipleOf: 0.5
+          description: "Habitable-room count as a listing in the market of `location.countryCode` would print it (Israel, Germany, France: living room included; half rooms allowed). See vocabularies/roomCountConventions.json."
+        bedrooms:
+          type: number
+          minimum: 0
+          description: Number of separate sleeping rooms. 0 = studio, when the source makes clear there is no separate bedroom.
+        bathrooms:
+          type: number
+          minimum: 0
+        interiorAreaSqm:
+          type: number
+          minimum: 0
+        balconyAreaSqm:
+          type: number
+          minimum: 0
+        gardenAreaSqm:
+          type: number
+          minimum: 0
+        storageAreaSqm:
+          type: number
+          minimum: 0
+        totalAreaSqm:
+          type: number
+          minimum: 0
+          description: Informative total (interior plus balconies and other counted areas as the market defines).
+        parkingSpaces:
+          type: integer
+          minimum: 0
+    Availability:
+      type: string
+      enum:
+        - available
+        - last_units
+        - sold_out
+      description: "Availability summary of a unit type. Absent = available. When inventory units exist for the type, consumers derive it: A = number of units with status `available`; sold_out when A = 0, last_units when A is small (operator threshold), available otherwise. Only `available` units count; onHold, reserved, booked, sold and notForSale never do."
+    UnitModel:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          $ref: "#/components/schemas/Id"
+        name:
+          $ref: "#/components/schemas/LocalizedString"
+        description:
+          $ref: "#/components/schemas/LocalizedString"
+        specs:
+          $ref: "#/components/schemas/UnitSpecs"
+        features:
+          $ref: "#/components/schemas/UnitFeatures"
+        availability:
+          $ref: "#/components/schemas/Availability"
+        marketing:
+          $ref: "#/components/schemas/UnitModelMarketing"
+        extensions:
+          $ref: "#/components/schemas/Extensions"
+    GreenCertification:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        level:
+          type: string
+    Floor:
+      type: object
+      required:
+        - number
+      properties:
+        id:
+          $ref: "#/components/schemas/Id"
+        number:
+          type: integer
+        name:
+          $ref: "#/components/schemas/LocalizedString"
+        marketing:
+          $ref: "#/components/schemas/FloorMarketing"
+        extensions:
+          $ref: "#/components/schemas/Extensions"
+    Building:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          $ref: "#/components/schemas/Id"
+        name:
+          $ref: "#/components/schemas/LocalizedString"
+        description:
+          $ref: "#/components/schemas/LocalizedString"
+        numberOfFloors:
+          type: integer
+          minimum: 0
+          description: Total floors.
+        floorsAboveGround:
+          type: integer
+          minimum: 0
+        floorsBelowGround:
+          type: integer
+          minimum: 0
+        numberOfElevators:
+          type: integer
+          minimum: 0
+        yearConstructed:
+          type: integer
+          minimum: 1800
+          maximum: 2200
+        architect:
+          $ref: "#/components/schemas/LocalizedString"
+        architectureStyle:
+          $ref: "#/components/schemas/LocalizedString"
+        constructionMaterials:
+          type: array
+          items:
+            type: string
+        greenCertifications:
+          type: array
+          items:
+            $ref: "#/components/schemas/GreenCertification"
+        marketing:
+          $ref: "#/components/schemas/BuildingMarketing"
+        floors:
+          type: array
+          items:
+            $ref: "#/components/schemas/Floor"
+        extensions:
+          $ref: "#/components/schemas/Extensions"
+    UnitStatus:
+      type: string
+      enum:
+        - available
+        - onHold
+        - reserved
+        - booked
+        - sold
+        - notForSale
+      description: "available = for sale now; onHold = temporarily withheld by the developer; reserved = held by a buyer, not yet contracted; booked = contract signed, not yet sold / registered; sold; notForSale = not offered. Transitions: available <-> onHold <-> reserved -> booked -> sold; any -> notForSale. Only `available` is buyer-available."
+    Reservation:
+      type: object
+      description: Opaque reservation facts for `reserved` / `booked` units. Never carries buyer identity.
+      properties:
+        until:
+          type: string
+          format: date-time
+          description: When the hold expires.
+        reference:
+          type: string
+          description: Opaque external reference (CRM / ERP key).
+    UnitLinks:
+      type: object
+      required:
+        - modelId
+      properties:
+        modelId:
+          $ref: "#/components/schemas/Id"
+          description: References unitModels[].id.
+        buildingId:
+          $ref: "#/components/schemas/Id"
+          description: References buildings[].id.
+        floorId:
+          $ref: "#/components/schemas/Id"
+          description: References buildings[].floors[].id.
+    Unit:
+      type: object
+      description: A specific inventory unit (apartment). Structure from 1.3.0; 1.4.0 adds timestamps, overrides, media, reservation facts and external ids for ERP / CRM synchronisation.
+      required:
+        - id
+        - unitNumber
+        - status
+        - links
+      properties:
+        id:
+          $ref: "#/components/schemas/Id"
+        unitNumber:
+          type: string
+        links:
+          $ref: "#/components/schemas/UnitLinks"
+        floorNumber:
+          type: integer
+          description: Convenience when floors[] is not modelled.
+        status:
+          $ref: "#/components/schemas/UnitStatus"
+        statusUpdatedAt:
+          type: string
+          format: date-time
+        price:
+          $ref: "#/components/schemas/Money"
+          description: Current asking price.
+        priceUpdatedAt:
+          type: string
+          format: date-time
+        startingPrice:
+          $ref: "#/components/schemas/Money"
+          description: List price before incentives (informative).
+        specs:
+          $ref: "#/components/schemas/UnitSpecs"
+          description: Overrides of the unit model's specs for this unit.
+        features:
+          $ref: "#/components/schemas/UnitFeatures"
+        marketing:
+          $ref: "#/components/schemas/UnitMarketing"
+        reservation:
+          $ref: "#/components/schemas/Reservation"
+        externalIds:
+          type: object
+          additionalProperties:
+            type: string
+          description: Ids of this unit in external systems, keyed by system name.
+        extensions:
+          $ref: "#/components/schemas/Extensions"
+    Developer:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          $ref: "#/components/schemas/Id"
+        name:
+          $ref: "#/components/schemas/LocalizedString"
+        description:
+          $ref: "#/components/schemas/LocalizedString"
+        projectIds:
+          type: array
+          items:
+            $ref: "#/components/schemas/Id"
+          description: Projects this developer is involved in (catalog documents).
+        companyDetails:
+          type: object
+          properties:
+            legalName:
+              $ref: "#/components/schemas/LocalizedString"
+            companyId:
+              type: string
+            vatId:
+              type: string
+        history:
+          type: object
+          properties:
+            yearsExperience:
+              type: integer
+              minimum: 0
+            projectsDelivered:
+              type: integer
+              minimum: 0
+            unitsSold:
+              type: integer
+              minimum: 0
+        contact:
+          $ref: "#/components/schemas/ContactInfo"
+        location:
+          $ref: "#/components/schemas/Location"
+        marketing:
+          $ref: "#/components/schemas/DeveloperMarketing"
+        extensions:
+          $ref: "#/components/schemas/Extensions"
+    Project:
+      type: object
+      required:
+        - id
+        - name
+        - status
+        - location
+      properties:
+        id:
+          $ref: "#/components/schemas/Id"
+        name:
+          $ref: "#/components/schemas/LocalizedString"
+        developerIds:
+          type: array
+          items:
+            $ref: "#/components/schemas/Id"
+          minItems: 1
+          description: Developers involved. Required in a catalog; optional in a ProjectDocument that carries `developer`.
+        description:
+          $ref: "#/components/schemas/LocalizedString"
+        type:
+          $ref: "#/components/schemas/ProjectType"
+        status:
+          $ref: "#/components/schemas/ProjectStatus"
+        location:
+          $ref: "#/components/schemas/Location"
+        contact:
+          $ref: "#/components/schemas/ContactInfo"
+        marketing:
+          $ref: "#/components/schemas/ProjectMarketing"
+        paymentPlan:
+          $ref: "#/components/schemas/PaymentPlan"
+        legal:
+          $ref: "#/components/schemas/LegalInfo"
+        interests:
+          type: array
+          items:
+            $ref: "#/components/schemas/InterestItem"
+        amenities:
+          type: array
+          items:
+            $ref: "#/components/schemas/AmenityItem"
+        unitModels:
+          type: array
+          items:
+            $ref: "#/components/schemas/UnitModel"
+        buildings:
+          type: array
+          items:
+            $ref: "#/components/schemas/Building"
+        inventory:
+          type: array
+          items:
+            $ref: "#/components/schemas/Unit"
+          description: Specific units. `links.modelId` MUST reference a unitModels[].id; buildingId / floorId MUST reference existing ids when given. Unit ids MUST be unique within the project.
+        extensions:
+          $ref: "#/components/schemas/Extensions"
+    RealEstateCatalog:
+      type: object
+      description: "Feed document: flattened lists of developers and projects linked by ids."
+      required:
+        - protocol
+        - developers
+        - projects
+      properties:
+        protocol:
+          $ref: "#/components/schemas/Protocol"
+        developers:
+          type: array
+          items:
+            $ref: "#/components/schemas/Developer"
+        projects:
+          type: array
+          items:
+            allOf:
+              - $ref: "#/components/schemas/Project"
+              - required:
+                  - developerIds
+        extensions:
+          $ref: "#/components/schemas/Extensions"
+      not:
+        required:
+          - project
+    ProjectDocument:
+      type: object
+      description: "Single-project document: one project with its primary developer (and optionally all developers). This is the shape an API exchanges for one project."
+      required:
+        - protocol
+        - project
+      properties:
+        protocol:
+          $ref: "#/components/schemas/Protocol"
+        project:
+          $ref: "#/components/schemas/Project"
+        developer:
+          $ref: "#/components/schemas/Developer"
+          description: The primary developer. Implied as `project.developerIds[0]` when that list is absent.
+        developers:
+          type: array
+          items:
+            $ref: "#/components/schemas/Developer"
+          description: All developers, when more than one.
+        extensions:
+          $ref: "#/components/schemas/Extensions"
+      not:
+        required:
+          - projects
+    InventoryUnitUpdate:
+      type: object
+      description: "Partial update of one unit: only the given members change. Unknown ids are created when `links.modelId` and `unitNumber` are supplied."
+      required:
+        - id
+      properties:
+        id:
+          $ref: "#/components/schemas/Id"
+        unitNumber:
+          type: string
+        links:
+          $ref: "#/components/schemas/UnitLinks"
+        floorNumber:
+          type: integer
+        status:
+          $ref: "#/components/schemas/UnitStatus"
+        statusUpdatedAt:
+          type: string
+          format: date-time
+        price:
+          $ref: "#/components/schemas/Money"
+        priceUpdatedAt:
+          type: string
+          format: date-time
+        reservation:
+          $ref: "#/components/schemas/Reservation"
+        externalIds:
+          type: object
+          additionalProperties:
+            type: string
+    InventoryUpdate:
+      type: object
+      description: Delta document for availability synchronisation (ERP / CRM to marketplace). Idempotent per (id, statusUpdatedAt).
+      required:
+        - protocol
+        - projectId
+        - updates
+      properties:
+        protocol:
+          $ref: "#/components/schemas/Protocol"
+        projectId:
+          $ref: "#/components/schemas/Id"
+        generatedAt:
+          type: string
+          format: date-time
+        updates:
+          type: array
+          minItems: 1
+          items:
+            $ref: "#/components/schemas/InventoryUnitUpdate"
+        extensions:
+          $ref: "#/components/schemas/Extensions"

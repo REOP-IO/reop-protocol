@@ -1,0 +1,23 @@
+{
+  "name": "experienceProviders",
+  "protocolVersion": "1.4.0",
+  "version": "2026-09-30",
+  "description": "Known Experience.provider keys. Open; any lower-case vendor key is valid.",
+  "closed": false,
+  "items": [
+    {
+      "key": "3destate",
+      "labels": {
+        "en": "3D Estate"
+      },
+      "website": "https://3destate.com"
+    },
+    {
+      "key": "matterport",
+      "labels": {
+        "en": "Matterport"
+      },
+      "website": "https://matterport.com"
+    }
+  ]
+}

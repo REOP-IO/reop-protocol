@@ -1,0 +1,65 @@
+{
+  "name": "orientations",
+  "protocolVersion": "1.4.0",
+  "version": "2026-09-30",
+  "description": "Orientation values (OrientationEnum of 1.3.0, unchanged).",
+  "closed": true,
+  "items": [
+    {
+      "key": "north",
+      "labels": {
+        "en": "North",
+        "he": "צפון"
+      }
+    },
+    {
+      "key": "south",
+      "labels": {
+        "en": "South",
+        "he": "דרום"
+      }
+    },
+    {
+      "key": "east",
+      "labels": {
+        "en": "East",
+        "he": "מזרח"
+      }
+    },
+    {
+      "key": "west",
+      "labels": {
+        "en": "West",
+        "he": "מערב"
+      }
+    },
+    {
+      "key": "northEast",
+      "labels": {
+        "en": "North East",
+        "he": "צפון-מזרח"
+      }
+    },
+    {
+      "key": "northWest",
+      "labels": {
+        "en": "North West",
+        "he": "צפון-מערב"
+      }
+    },
+    {
+      "key": "southEast",
+      "labels": {
+        "en": "South East",
+        "he": "דרום-מזרח"
+      }
+    },
+    {
+      "key": "southWest",
+      "labels": {
+        "en": "South West",
+        "he": "דרום-מערב"
+      }
+    }
+  ]
+}

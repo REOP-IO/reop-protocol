@@ -1,0 +1,665 @@
+{
+  "name": "amenities",
+  "protocolVersion": "1.4.0",
+  "version": "2026-09-30",
+  "description": "Amenity keys (AmenityEnum of 1.3.0, unchanged) with bilingual labels and a category. A custom amenity uses a key outside this list and carries a label in the document.",
+  "closed": false,
+  "items": [
+    {
+      "key": "airConditioning",
+      "labels": {
+        "en": "Air Conditioning",
+        "he": "מיזוג אוויר"
+      },
+      "category": "unit"
+    },
+    {
+      "key": "heating",
+      "labels": {
+        "en": "Heating",
+        "he": "חימום"
+      },
+      "category": "unit"
+    },
+    {
+      "key": "centralHeating",
+      "labels": {
+        "en": "Central Heating",
+        "he": "חימום מרכזי"
+      },
+      "category": "unit"
+    },
+    {
+      "key": "underfloorHeating",
+      "labels": {
+        "en": "Underfloor Heating",
+        "he": "חימום תת-רצפתי"
+      },
+      "category": "unit"
+    },
+    {
+      "key": "elevator",
+      "labels": {
+        "en": "Elevator",
+        "he": "מעלית"
+      },
+      "category": "building"
+    },
+    {
+      "key": "freightElevator",
+      "labels": {
+        "en": "Freight Elevator",
+        "he": "מעלית משא"
+      },
+      "category": "building"
+    },
+    {
+      "key": "shabbatElevator",
+      "labels": {
+        "en": "Shabbat Elevator",
+        "he": "מעלית שבת"
+      },
+      "category": "building"
+    },
+    {
+      "key": "parking",
+      "labels": {
+        "en": "Parking",
+        "he": "חניה"
+      },
+      "category": "parking"
+    },
+    {
+      "key": "undergroundParking",
+      "labels": {
+        "en": "Underground Parking",
+        "he": "חניה תת-קרקעית"
+      },
+      "category": "parking"
+    },
+    {
+      "key": "coveredParking",
+      "labels": {
+        "en": "Covered Parking",
+        "he": "חניה מקורה"
+      },
+      "category": "parking"
+    },
+    {
+      "key": "robotParking",
+      "labels": {
+        "en": "Robot Parking",
+        "he": "חניה רובוטית"
+      },
+      "category": "parking"
+    },
+    {
+      "key": "guestParking",
+      "labels": {
+        "en": "Guest Parking",
+        "he": "חניית אורחים"
+      },
+      "category": "parking"
+    },
+    {
+      "key": "evCharging",
+      "labels": {
+        "en": "EV Charging",
+        "he": "עמדת טעינה לרכב חשמלי"
+      },
+      "category": "parking"
+    },
+    {
+      "key": "storage",
+      "labels": {
+        "en": "Storage",
+        "he": "מחסן"
+      },
+      "category": "unit"
+    },
+    {
+      "key": "bicycleStorage",
+      "labels": {
+        "en": "Bicycle Storage",
+        "he": "אחסון אופניים"
+      },
+      "category": "building"
+    },
+    {
+      "key": "strollerRoom",
+      "labels": {
+        "en": "Stroller Room",
+        "he": "חדר עגלות"
+      },
+      "category": "building"
+    },
+    {
+      "key": "balcony",
+      "labels": {
+        "en": "Balcony",
+        "he": "מרפסת"
+      },
+      "category": "unit"
+    },
+    {
+      "key": "terrace",
+      "labels": {
+        "en": "Terrace",
+        "he": "טרסה"
+      },
+      "category": "unit"
+    },
+    {
+      "key": "privateGarden",
+      "labels": {
+        "en": "Private Garden",
+        "he": "גינה פרטית"
+      },
+      "category": "unit"
+    },
+    {
+      "key": "roofDeck",
+      "labels": {
+        "en": "Roof Deck",
+        "he": "דק גג"
+      },
+      "category": "unit"
+    },
+    {
+      "key": "pool",
+      "labels": {
+        "en": "Pool",
+        "he": "בריכה"
+      },
+      "category": "recreation"
+    },
+    {
+      "key": "infinityPool",
+      "labels": {
+        "en": "Infinity Pool",
+        "he": "בריכת אינפיניטי"
+      },
+      "category": "recreation"
+    },
+    {
+      "key": "heatedPool",
+      "labels": {
+        "en": "Heated Pool",
+        "he": "בריכה מחוממת"
+      },
+      "category": "recreation"
+    },
+    {
+      "key": "kidsPool",
+      "labels": {
+        "en": "Kids Pool",
+        "he": "בריכת ילדים"
+      },
+      "category": "recreation"
+    },
+    {
+      "key": "indoorPool",
+      "labels": {
+        "en": "Indoor Pool",
+        "he": "בריכה מקורה"
+      },
+      "category": "recreation"
+    },
+    {
+      "key": "jacuzzi",
+      "labels": {
+        "en": "Jacuzzi",
+        "he": "ג'קוזי"
+      },
+      "category": "recreation"
+    },
+    {
+      "key": "sauna",
+      "labels": {
+        "en": "Sauna",
+        "he": "סאונה"
+      },
+      "category": "recreation"
+    },
+    {
+      "key": "steamRoom",
+      "labels": {
+        "en": "Steam Room",
+        "he": "חדר אדים"
+      },
+      "category": "recreation"
+    },
+    {
+      "key": "spa",
+      "labels": {
+        "en": "Spa",
+        "he": "ספא"
+      },
+      "category": "recreation"
+    },
+    {
+      "key": "gym",
+      "labels": {
+        "en": "Gym",
+        "he": "חדר כושר"
+      },
+      "category": "recreation"
+    },
+    {
+      "key": "yogaStudio",
+      "labels": {
+        "en": "Yoga Studio",
+        "he": "סטודיו יוגה"
+      },
+      "category": "recreation"
+    },
+    {
+      "key": "tennisCourt",
+      "labels": {
+        "en": "Tennis Court",
+        "he": "מגרש טניס"
+      },
+      "category": "recreation"
+    },
+    {
+      "key": "squashCourt",
+      "labels": {
+        "en": "Squash Court",
+        "he": "מגרש סקווש"
+      },
+      "category": "recreation"
+    },
+    {
+      "key": "basketballCourt",
+      "labels": {
+        "en": "Basketball Court",
+        "he": "מגרש כדורסל"
+      },
+      "category": "recreation"
+    },
+    {
+      "key": "paddleCourt",
+      "labels": {
+        "en": "Paddle Court",
+        "he": "מגרש פאדל"
+      },
+      "category": "recreation"
+    },
+    {
+      "key": "runningTrack",
+      "labels": {
+        "en": "Running Track",
+        "he": "מסלול ריצה"
+      },
+      "category": "recreation"
+    },
+    {
+      "key": "playground",
+      "labels": {
+        "en": "Playground",
+        "he": "גן משחקים"
+      },
+      "category": "recreation"
+    },
+    {
+      "key": "kidsClub",
+      "labels": {
+        "en": "Kids Club",
+        "he": "מועדון ילדים"
+      },
+      "category": "recreation"
+    },
+    {
+      "key": "gameRoom",
+      "labels": {
+        "en": "Game Room",
+        "he": "חדר משחקים"
+      },
+      "category": "recreation"
+    },
+    {
+      "key": "cinema",
+      "labels": {
+        "en": "Cinema",
+        "he": "קולנוע"
+      },
+      "category": "recreation"
+    },
+    {
+      "key": "library",
+      "labels": {
+        "en": "Library",
+        "he": "ספרייה"
+      },
+      "category": "recreation"
+    },
+    {
+      "key": "coworkingSpace",
+      "labels": {
+        "en": "Coworking Space",
+        "he": "חלל עבודה משותף"
+      },
+      "category": "services"
+    },
+    {
+      "key": "conferenceRoom",
+      "labels": {
+        "en": "Conference Room",
+        "he": "חדר ישיבות"
+      },
+      "category": "services"
+    },
+    {
+      "key": "lounge",
+      "labels": {
+        "en": "Lounge",
+        "he": "טרקלין"
+      },
+      "category": "services"
+    },
+    {
+      "key": "partyRoom",
+      "labels": {
+        "en": "Party Room",
+        "he": "חדר אירועים"
+      },
+      "category": "services"
+    },
+    {
+      "key": "bbqArea",
+      "labels": {
+        "en": "BBQ Area",
+        "he": "אזור ברביקיו"
+      },
+      "category": "services"
+    },
+    {
+      "key": "outdoorKitchen",
+      "labels": {
+        "en": "Outdoor Kitchen",
+        "he": "מטבח חוץ"
+      },
+      "category": "services"
+    },
+    {
+      "key": "doorman",
+      "labels": {
+        "en": "Doorman",
+        "he": "שומר בכניסה"
+      },
+      "category": "security"
+    },
+    {
+      "key": "concierge",
+      "labels": {
+        "en": "Concierge",
+        "he": "קונסיירז'"
+      },
+      "category": "services"
+    },
+    {
+      "key": "securitySystem",
+      "labels": {
+        "en": "Security System",
+        "he": "מערכת אבטחה"
+      },
+      "category": "security"
+    },
+    {
+      "key": "cctv",
+      "labels": {
+        "en": "CCTV",
+        "he": "מצלמות אבטחה"
+      },
+      "category": "security"
+    },
+    {
+      "key": "intercom",
+      "labels": {
+        "en": "Intercom",
+        "he": "אינטרקום"
+      },
+      "category": "security"
+    },
+    {
+      "key": "videoIntercom",
+      "labels": {
+        "en": "Video Intercom",
+        "he": "אינטרקום וידאו"
+      },
+      "category": "security"
+    },
+    {
+      "key": "keylessEntry",
+      "labels": {
+        "en": "Keyless Entry",
+        "he": "כניסה ללא מפתח"
+      },
+      "category": "security"
+    },
+    {
+      "key": "smartHome",
+      "labels": {
+        "en": "Smart Home",
+        "he": "בית חכם"
+      },
+      "category": "unit"
+    },
+    {
+      "key": "generator",
+      "labels": {
+        "en": "Generator",
+        "he": "גנרטור"
+      },
+      "category": "building"
+    },
+    {
+      "key": "solarPanels",
+      "labels": {
+        "en": "Solar Panels",
+        "he": "פאנלים סולאריים"
+      },
+      "category": "building"
+    },
+    {
+      "key": "waterTank",
+      "labels": {
+        "en": "Water Tank",
+        "he": "מיכל מים"
+      },
+      "category": "building"
+    },
+    {
+      "key": "accessibility",
+      "labels": {
+        "en": "Accessibility",
+        "he": "נגישות"
+      },
+      "category": "building"
+    },
+    {
+      "key": "wheelchairAccessible",
+      "labels": {
+        "en": "Wheelchair Accessible",
+        "he": "נגיש לכיסאות גלגלים"
+      },
+      "category": "building"
+    },
+    {
+      "key": "furnished",
+      "labels": {
+        "en": "Furnished",
+        "he": "מרוהט"
+      },
+      "category": "unit"
+    },
+    {
+      "key": "partiallyFurnished",
+      "labels": {
+        "en": "Partially Furnished",
+        "he": "מרוהט חלקית"
+      },
+      "category": "unit"
+    },
+    {
+      "key": "kitchenIsland",
+      "labels": {
+        "en": "Kitchen Island",
+        "he": "אי במטבח"
+      },
+      "category": "unit"
+    },
+    {
+      "key": "walkInCloset",
+      "labels": {
+        "en": "Walk-in Closet",
+        "he": "ארון הליכה"
+      },
+      "category": "unit"
+    },
+    {
+      "key": "safeRoom",
+      "labels": {
+        "en": "Safe Room",
+        "he": "ממ\"ד"
+      },
+      "category": "unit"
+    },
+    {
+      "key": "highCeilings",
+      "labels": {
+        "en": "High Ceilings",
+        "he": "תקרות גבוהות"
+      },
+      "category": "unit"
+    },
+    {
+      "key": "doubleGlazing",
+      "labels": {
+        "en": "Double Glazing",
+        "he": "זיגוג כפול"
+      },
+      "category": "unit"
+    },
+    {
+      "key": "parquetFlooring",
+      "labels": {
+        "en": "Parquet Flooring",
+        "he": "ריצוף פרקט"
+      },
+      "category": "unit"
+    },
+    {
+      "key": "marbleFlooring",
+      "labels": {
+        "en": "Marble Flooring",
+        "he": "ריצוף שיש"
+      },
+      "category": "unit"
+    },
+    {
+      "key": "fireplace",
+      "labels": {
+        "en": "Fireplace",
+        "he": "קמין"
+      },
+      "category": "unit"
+    },
+    {
+      "key": "dishwasher",
+      "labels": {
+        "en": "Dishwasher",
+        "he": "מדיח כלים"
+      },
+      "category": "unit"
+    },
+    {
+      "key": "washingMachine",
+      "labels": {
+        "en": "Washing Machine",
+        "he": "מכונת כביסה"
+      },
+      "category": "unit"
+    },
+    {
+      "key": "dryer",
+      "labels": {
+        "en": "Dryer",
+        "he": "מייבש"
+      },
+      "category": "unit"
+    },
+    {
+      "key": "microwave",
+      "labels": {
+        "en": "Microwave",
+        "he": "מיקרוגל"
+      },
+      "category": "unit"
+    },
+    {
+      "key": "refrigerator",
+      "labels": {
+        "en": "Refrigerator",
+        "he": "מקרר"
+      },
+      "category": "unit"
+    },
+    {
+      "key": "wineCellar",
+      "labels": {
+        "en": "Wine Cellar",
+        "he": "מרתף יין"
+      },
+      "category": "unit"
+    },
+    {
+      "key": "petsAllowed",
+      "labels": {
+        "en": "Pets Allowed",
+        "he": "חיות מחמד מותרות"
+      },
+      "category": "rules"
+    },
+    {
+      "key": "smokingAllowed",
+      "labels": {
+        "en": "Smoking Allowed",
+        "he": "עישון מותר"
+      },
+      "category": "rules"
+    },
+    {
+      "key": "cleaningService",
+      "labels": {
+        "en": "Cleaning Service",
+        "he": "שירות ניקיון"
+      },
+      "category": "services"
+    },
+    {
+      "key": "laundryService",
+      "labels": {
+        "en": "Laundry Service",
+        "he": "שירות כביסה"
+      },
+      "category": "services"
+    },
+    {
+      "key": "shuttleService",
+      "labels": {
+        "en": "Shuttle Service",
+        "he": "שירות הסעות"
+      },
+      "category": "services"
+    },
+    {
+      "key": "maintenanceOnSite",
+      "labels": {
+        "en": "Maintenance On Site",
+        "he": "תחזוקה באתר"
+      },
+      "category": "services"
+    }
+  ]
+}

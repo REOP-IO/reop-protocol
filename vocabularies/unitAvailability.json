@@ -1,0 +1,30 @@
+{
+  "name": "unitAvailability",
+  "protocolVersion": "1.4.0",
+  "version": "2026-09-30",
+  "description": "Availability summary of a unit type (new in 1.4.0). Derived from inventory when units exist: A = units with status available; sold_out when A = 0, last_units when A is at or below the operator threshold, available otherwise.",
+  "closed": true,
+  "items": [
+    {
+      "key": "available",
+      "labels": {
+        "en": "Available",
+        "he": "זמין"
+      }
+    },
+    {
+      "key": "last_units",
+      "labels": {
+        "en": "Last units",
+        "he": "יחידות אחרונות"
+      }
+    },
+    {
+      "key": "sold_out",
+      "labels": {
+        "en": "Sold out",
+        "he": "אזל מהמלאי"
+      }
+    }
+  ]
+}

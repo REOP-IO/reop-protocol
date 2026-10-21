@@ -1,0 +1,51 @@
+{
+  "name": "experienceTypes",
+  "protocolVersion": "1.4.0",
+  "version": "2026-09-30",
+  "description": "Recommended Experience.type values. Open.",
+  "closed": false,
+  "items": [
+    {
+      "key": "virtualTour",
+      "labels": {
+        "en": "Virtual tour"
+      }
+    },
+    {
+      "key": "dollhouse",
+      "labels": {
+        "en": "Dollhouse"
+      }
+    },
+    {
+      "key": "model3d",
+      "labels": {
+        "en": "3D model"
+      }
+    },
+    {
+      "key": "video360",
+      "labels": {
+        "en": "360 video"
+      }
+    },
+    {
+      "key": "ar",
+      "labels": {
+        "en": "Augmented reality"
+      }
+    },
+    {
+      "key": "walkthrough",
+      "labels": {
+        "en": "Walkthrough video"
+      }
+    },
+    {
+      "key": "other",
+      "labels": {
+        "en": "Other"
+      }
+    }
+  ]
+}

@@ -1,0 +1,950 @@
+{
+  "protocol": {
+    "name": "REOP",
+    "version": "1.4.0",
+    "generatedAt": "2026-10-21T10:00:00Z",
+    "generator": "reop-app/2026.10",
+    "defaultLocale": "en"
+  },
+  "project": {
+    "id": "prj_rothschild_collection",
+    "name": {
+      "en": "The Rothschild Collection",
+      "he": "אוסף רוטשילד"
+    },
+    "developerIds": [
+      "dev_tlv_urban_01"
+    ],
+    "type": "luxury",
+    "description": {
+      "en": "An architectural icon combining a preserved 1920s eclectic building with a modern glass tower. Features smart-home integration and sea views.",
+      "he": "אייקון אדריכלי המשלב מבנה לשימור משנות ה-20 עם מגדל זכוכית מודרני. כולל מערכות בית חכם ונוף לים."
+    },
+    "status": {
+      "state": "underConstruction",
+      "phase": "structural_frame",
+      "progressPercentage": 45,
+      "startDate": "2025-03-01",
+      "completionDate": "2027-06-30",
+      "handoverDate": "2027-08-30"
+    },
+    "location": {
+      "address": {
+        "en": "Rothschild Blvd 142",
+        "he": "שדרות רוטשילד 142"
+      },
+      "city": {
+        "en": "Tel Aviv-Yafo",
+        "he": "תל אביב-יפו"
+      },
+      "district": {
+        "en": "Tel Aviv District",
+        "he": "מחוז תל אביב"
+      },
+      "postalCode": "6527101",
+      "countryCode": "IL",
+      "coordinates": {
+        "lat": 32.0625,
+        "lng": 34.7766
+      }
+    },
+    "contact": {
+      "email": "sales@rothschild142.example",
+      "phone": "+97235559900",
+      "whatsapp": "+972501112222",
+      "website": "https://rothschild142.example"
+    },
+    "marketing": {
+      "startingPrice": {
+        "amount": 6200000,
+        "currency": "ILS"
+      },
+      "priceRange": {
+        "min": {
+          "amount": 6200000,
+          "currency": "ILS"
+        },
+        "max": {
+          "amount": 22000000,
+          "currency": "ILS"
+        }
+      },
+      "projectUrl": "https://tlv-urban.example/rothschild",
+      "website": "https://rothschild142.example",
+      "heroImage": "https://cdn.reop.io/prj/roth142/hero-render.jpg",
+      "gallery": [
+        {
+          "url": "https://cdn.reop.io/prj/roth142/hero-render.jpg",
+          "type": "image",
+          "mimeType": "image/jpeg",
+          "width": 2400,
+          "height": 1600,
+          "alt": {
+            "en": "Tower render from the boulevard",
+            "he": "הדמיית המגדל מהשדרה"
+          },
+          "role": "hero"
+        },
+        {
+          "url": "https://cdn.reop.io/prj/roth142/lobby.jpg",
+          "type": "image",
+          "alt": {
+            "en": "Lobby",
+            "he": "לובי"
+          }
+        },
+        {
+          "url": "https://cdn.reop.io/prj/roth142/pool-deck.jpg",
+          "type": "image",
+          "caption": {
+            "en": "Rooftop pool deck"
+          }
+        },
+        {
+          "url": "https://cdn.reop.io/prj/roth142/virtual-tour.mp4",
+          "type": "video",
+          "mimeType": "video/mp4",
+          "previewUrl": "https://cdn.reop.io/prj/roth142/virtual-tour-poster.jpg",
+          "title": {
+            "en": "Project film"
+          }
+        }
+      ],
+      "logos": [
+        {
+          "url": "https://cdn.reop.io/dev/tlv-urban/logo.png",
+          "type": "image",
+          "title": {
+            "en": "Tel Aviv Urban Heights"
+          },
+          "role": "developer"
+        },
+        {
+          "url": "https://cdn.reop.io/prj/roth142/architects-logo.svg",
+          "type": "image",
+          "mimeType": "image/svg+xml",
+          "title": {
+            "en": "Bar Orian Architects"
+          },
+          "role": "architect"
+        },
+        {
+          "url": "https://cdn.reop.io/prj/roth142/bank-logo.png",
+          "type": "image",
+          "title": {
+            "en": "Bank Leumi"
+          },
+          "role": "bank"
+        }
+      ],
+      "floorPlans": [
+        {
+          "url": "https://cdn.reop.io/prj/roth142/master-site-plan.pdf",
+          "type": "document",
+          "format": "pdf",
+          "mimeType": "application/pdf",
+          "fileName": "rothschild-site-plan.pdf",
+          "previewUrl": "https://cdn.reop.io/prj/roth142/master-site-plan.jpg",
+          "role": "sitePlan",
+          "title": {
+            "en": "Site plan",
+            "he": "תוכנית מגרש"
+          }
+        }
+      ],
+      "experiences": [
+        {
+          "id": "exp_roth_project_tour",
+          "type": "virtualTour",
+          "provider": "3destate",
+          "title": {
+            "en": "Walk the project"
+          },
+          "url": "https://player.3destate.example/roth142",
+          "embed": {
+            "kind": "iframe",
+            "url": "https://player.3destate.example/roth142/embed",
+            "params": {
+              "hideGuide": true
+            }
+          },
+          "previewUrl": "https://cdn.reop.io/prj/roth142/tour-still.jpg"
+        }
+      ],
+      "documents": [
+        {
+          "url": "https://cdn.reop.io/prj/roth142/price-list-2026-10.pdf",
+          "type": "document",
+          "format": "pdf",
+          "mimeType": "application/pdf",
+          "fileName": "price-list.pdf",
+          "role": "priceList",
+          "title": {
+            "en": "Price list October 2026",
+            "he": "מחירון אוקטובר 2026"
+          }
+        }
+      ],
+      "brochurePdf": "https://cdn.reop.io/prj/roth142/brochure-v2.pdf",
+      "social": {
+        "instagram": "https://instagram.com/rothschild_collection"
+      }
+    },
+    "paymentPlan": {
+      "currency": "ILS",
+      "totalPrice": {
+        "amount": 6200000,
+        "currency": "ILS"
+      },
+      "installments": [
+        {
+          "id": "inst_signing",
+          "phase": "signing",
+          "title": {
+            "en": "On signing",
+            "he": "במעמד החתימה"
+          },
+          "percentage": 15
+        },
+        {
+          "id": "inst_foundation",
+          "phase": "foundation",
+          "title": {
+            "en": "Foundation complete",
+            "he": "סיום יסודות"
+          },
+          "percentage": 20,
+          "dueDate": "2026-12-31"
+        },
+        {
+          "id": "inst_shell",
+          "phase": "shell_completion",
+          "title": {
+            "en": "Shell complete",
+            "he": "סיום שלד"
+          },
+          "percentage": 15,
+          "milestone": {
+            "en": "On completion of the structural frame",
+            "he": "עם סיום השלד"
+          }
+        },
+        {
+          "id": "inst_handover",
+          "phase": "handover",
+          "title": {
+            "en": "On key handover",
+            "he": "במסירת המפתח"
+          },
+          "percentage": 50,
+          "milestone": {
+            "en": "On key handover",
+            "he": "במסירת המפתח"
+          },
+          "description": {
+            "en": "Balance, linked to the construction index."
+          }
+        }
+      ]
+    },
+    "legal": {
+      "permitNumber": "TA-24-9981",
+      "escrowBank": "Bank Leumi",
+      "projectBankAccountId": "10-222-333444",
+      "lawyer": "Goldfarb Seligman & Co."
+    },
+    "interests": [
+      {
+        "id": "poi_habima",
+        "name": {
+          "en": "Habima Theater",
+          "he": "תיאטרון הבימה"
+        },
+        "type": "theater",
+        "distanceMeters": 300,
+        "coordinates": {
+          "lat": 32.0729,
+          "lng": 34.7794
+        },
+        "showOnMap": true
+      },
+      {
+        "id": "poi_rothschild_center",
+        "name": {
+          "en": "Rothschild Center",
+          "he": "מרכז רוטשילד"
+        },
+        "type": "mall",
+        "distanceMeters": 150
+      },
+      {
+        "id": "poi_independence_hall",
+        "name": {
+          "en": "Independence Hall",
+          "he": "היכל העצמאות"
+        },
+        "type": "museum",
+        "distanceMeters": 600,
+        "coordinates": {
+          "lat": 32.0633,
+          "lng": 34.7703
+        }
+      },
+      {
+        "id": "poi_ichilov",
+        "name": {
+          "en": "Ichilov Hospital",
+          "he": "בית החולים איכילוב"
+        },
+        "type": "hospital",
+        "distanceMeters": 2500,
+        "showOnMap": false
+      }
+    ],
+    "amenities": [
+      {
+        "name": "doorman",
+        "cost": "included",
+        "category": "security"
+      },
+      {
+        "name": "pool",
+        "cost": "common",
+        "category": "recreation"
+      },
+      {
+        "name": "smartHome",
+        "cost": "included",
+        "category": "unit"
+      },
+      {
+        "name": "gym",
+        "cost": "common",
+        "category": "recreation"
+      },
+      {
+        "name": "undergroundParking",
+        "cost": "private",
+        "category": "parking"
+      },
+      {
+        "name": "wineCellar",
+        "cost": "common"
+      },
+      {
+        "name": "bicycleStorage",
+        "cost": "included"
+      },
+      {
+        "name": "spa",
+        "cost": "paid"
+      },
+      {
+        "name": "residentsClub",
+        "label": {
+          "en": "Residents' club",
+          "he": "מועדון דיירים"
+        },
+        "cost": "common",
+        "category": "recreation"
+      }
+    ],
+    "unitModels": [
+      {
+        "id": "model_roth_studio",
+        "name": {
+          "en": "Type S - City Studio",
+          "he": "טיפוס S - סטודיו עירוני"
+        },
+        "description": {
+          "en": "Efficient studio layout perfect for investors."
+        },
+        "specs": {
+          "bedrooms": 0,
+          "bathrooms": 1,
+          "interiorAreaSqm": 45,
+          "balconyAreaSqm": 0
+        },
+        "features": {
+          "view": "street"
+        },
+        "availability": "last_units",
+        "marketing": {
+          "startingPrice": {
+            "amount": 6200000,
+            "currency": "ILS"
+          },
+          "heroImage": "https://cdn.reop.io/prj/roth142/units/studio-living.jpg",
+          "gallery": [
+            {
+              "url": "https://cdn.reop.io/prj/roth142/units/studio-living.jpg",
+              "type": "image",
+              "alt": {
+                "en": "Studio living area"
+              }
+            },
+            {
+              "url": "https://cdn.reop.io/prj/roth142/units/studio-kitchen.jpg",
+              "type": "image"
+            }
+          ],
+          "floorPlans": [
+            {
+              "url": "https://cdn.reop.io/plans/studio-layout.pdf",
+              "type": "document",
+              "format": "pdf",
+              "mimeType": "application/pdf",
+              "fileName": "type-s-plan.pdf",
+              "previewUrl": "https://cdn.reop.io/plans/studio-layout.jpg",
+              "role": "plan"
+            },
+            {
+              "url": "https://cdn.reop.io/plans/studio-layout.dwg",
+              "type": "document",
+              "format": "dwg",
+              "mimeType": "application/acad",
+              "fileName": "type-s-plan.dwg",
+              "role": "blueprint"
+            }
+          ]
+        }
+      },
+      {
+        "id": "model_roth_1br",
+        "name": {
+          "en": "Type A - Urban 1BR",
+          "he": "טיפוס A - דירת 2 חדרים אורבנית"
+        },
+        "description": {
+          "en": "Spacious one bedroom with sunset balcony."
+        },
+        "specs": {
+          "rooms": 2,
+          "bedrooms": 1,
+          "bathrooms": 1,
+          "interiorAreaSqm": 62,
+          "balconyAreaSqm": 8,
+          "storageAreaSqm": 4,
+          "parkingSpaces": 1
+        },
+        "features": {
+          "orientation": [
+            "west"
+          ],
+          "view": "city"
+        },
+        "availability": "available",
+        "marketing": {
+          "startingPrice": {
+            "amount": 7100000,
+            "currency": "ILS"
+          },
+          "priceRange": {
+            "min": {
+              "amount": 7100000,
+              "currency": "ILS"
+            },
+            "max": {
+              "amount": 7900000,
+              "currency": "ILS"
+            }
+          },
+          "heroImage": "https://cdn.reop.io/prj/roth142/units/1br-living.jpg",
+          "gallery": [
+            {
+              "url": "https://cdn.reop.io/prj/roth142/units/1br-living.jpg",
+              "type": "image"
+            },
+            {
+              "url": "https://cdn.reop.io/prj/roth142/units/1br-bedroom.jpg",
+              "type": "image"
+            },
+            {
+              "url": "https://cdn.reop.io/prj/roth142/units/1br-balcony.jpg",
+              "type": "image"
+            }
+          ],
+          "floorPlans": [
+            {
+              "url": "https://cdn.reop.io/plans/1br-layout.png",
+              "type": "image",
+              "format": "png",
+              "mimeType": "image/png",
+              "role": "plan"
+            }
+          ],
+          "experiences": [
+            {
+              "id": "exp_roth_1br_tour",
+              "type": "virtualTour",
+              "provider": "3destate",
+              "url": "https://player.3destate.example/roth142/1br",
+              "embed": {
+                "kind": "iframe",
+                "url": "https://player.3destate.example/roth142/1br/embed",
+                "params": {
+                  "lang": "he",
+                  "hideGuide": true
+                }
+              },
+              "previewUrl": "https://cdn.reop.io/prj/roth142/units/1br-dollhouse.jpg",
+              "floors": [
+                {
+                  "index": 0,
+                  "imageUrl": "https://cdn.reop.io/prj/roth142/units/1br-top.jpg",
+                  "dollhouseImageUrl": "https://cdn.reop.io/prj/roth142/units/1br-dollhouse.jpg"
+                }
+              ],
+              "providerData": {
+                "style": "scandinavian"
+              }
+            },
+            {
+              "id": "exp_roth_1br_dollhouse",
+              "type": "dollhouse",
+              "provider": "3destate",
+              "url": "https://player.3destate.example/roth142/1br/dollhouse",
+              "previewUrl": "https://cdn.reop.io/prj/roth142/units/1br-dollhouse.jpg"
+            }
+          ]
+        }
+      },
+      {
+        "id": "model_roth_2br",
+        "name": {
+          "en": "Type B - Boulevard 3.5 rooms",
+          "he": "טיפוס B - דירת 3.5 חדרים לשדרה"
+        },
+        "description": {
+          "en": "Family apartment facing the historic boulevard."
+        },
+        "specs": {
+          "rooms": 3.5,
+          "bathrooms": 2,
+          "interiorAreaSqm": 92,
+          "balconyAreaSqm": 14
+        },
+        "features": {
+          "orientation": [
+            "south",
+            "east"
+          ],
+          "view": "park",
+          "tags": [
+            "cornerUnit"
+          ]
+        },
+        "marketing": {
+          "startingPrice": {
+            "amount": 9500000,
+            "currency": "ILS"
+          },
+          "floorPlans": [
+            {
+              "url": "https://cdn.reop.io/plans/2br-layout.jpg",
+              "type": "image",
+              "format": "jpg",
+              "role": "plan"
+            }
+          ]
+        }
+      },
+      {
+        "id": "model_roth_ph",
+        "name": {
+          "en": "Type PH - Sky Penthouse",
+          "he": "טיפוס PH - פנטהאוז שמיים"
+        },
+        "description": {
+          "en": "Full floor penthouse with 360 degree views."
+        },
+        "specs": {
+          "rooms": 5,
+          "bedrooms": 3,
+          "bathrooms": 3.5,
+          "interiorAreaSqm": 180,
+          "balconyAreaSqm": 80,
+          "totalAreaSqm": 260,
+          "parkingSpaces": 2
+        },
+        "features": {
+          "orientation": [
+            "north",
+            "south",
+            "east",
+            "west"
+          ],
+          "view": "sea_full",
+          "tags": [
+            "smartHome",
+            "jacuzzi",
+            "privateElevator"
+          ]
+        },
+        "availability": "sold_out",
+        "marketing": {
+          "startingPrice": {
+            "amount": 22000000,
+            "currency": "ILS"
+          },
+          "heroImage": "https://cdn.reop.io/prj/roth142/units/ph-terrace.jpg",
+          "gallery": [
+            {
+              "url": "https://cdn.reop.io/prj/roth142/units/ph-terrace.jpg",
+              "type": "image"
+            }
+          ],
+          "floorPlans": [
+            {
+              "url": "https://cdn.reop.io/plans/ph-level-1.pdf",
+              "type": "document",
+              "format": "pdf",
+              "mimeType": "application/pdf",
+              "previewUrl": "https://cdn.reop.io/plans/ph-level-1.jpg",
+              "title": {
+                "en": "Level 1"
+              },
+              "role": "plan"
+            },
+            {
+              "url": "https://cdn.reop.io/plans/ph-roof.pdf",
+              "type": "document",
+              "format": "pdf",
+              "mimeType": "application/pdf",
+              "previewUrl": "https://cdn.reop.io/plans/ph-roof.jpg",
+              "title": {
+                "en": "Roof"
+              },
+              "role": "plan"
+            }
+          ]
+        }
+      }
+    ],
+    "buildings": [
+      {
+        "id": "bldg_glass_tower",
+        "name": {
+          "en": "The Glass Tower",
+          "he": "מגדל הזכוכית"
+        },
+        "description": {
+          "en": "The main residential tower."
+        },
+        "numberOfFloors": 32,
+        "floorsAboveGround": 30,
+        "floorsBelowGround": 2,
+        "numberOfElevators": 4,
+        "yearConstructed": 2027,
+        "architect": {
+          "en": "Bar Orian Architects",
+          "he": "בר אוריין אדריכלים"
+        },
+        "architectureStyle": {
+          "en": "Contemporary glass tower",
+          "he": "מגדל זכוכית עכשווי"
+        },
+        "constructionMaterials": [
+          "concrete",
+          "glass"
+        ],
+        "greenCertifications": [
+          {
+            "name": "SI 5281",
+            "level": "3 stars"
+          }
+        ],
+        "marketing": {
+          "heroImage": "https://cdn.reop.io/prj/roth142/tower-exterior.jpg",
+          "gallery": [
+            {
+              "url": "https://cdn.reop.io/prj/roth142/tower-exterior.jpg",
+              "type": "image"
+            }
+          ],
+          "floorPlans": [
+            {
+              "url": "https://cdn.reop.io/plans/tower-typical-floor.pdf",
+              "type": "document",
+              "format": "pdf",
+              "previewUrl": "https://cdn.reop.io/plans/tower-typical-floor.jpg",
+              "title": {
+                "en": "Typical floor"
+              },
+              "role": "plan"
+            }
+          ]
+        },
+        "floors": [
+          {
+            "id": "f_01",
+            "number": 1,
+            "name": {
+              "en": "Garden Level",
+              "he": "מפלס גן"
+            }
+          },
+          {
+            "id": "f_15",
+            "number": 15,
+            "name": {
+              "en": "Sky Lobby Level",
+              "he": "מפלס לובי שמיים"
+            }
+          },
+          {
+            "id": "f_30",
+            "number": 30,
+            "name": {
+              "en": "Penthouse Level",
+              "he": "מפלס פנטהאוז"
+            },
+            "marketing": {
+              "startingPrice": {
+                "amount": 22000000,
+                "currency": "ILS"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "inventory": [
+      {
+        "id": "u_roth_101",
+        "unitNumber": "101",
+        "links": {
+          "modelId": "model_roth_1br",
+          "buildingId": "bldg_glass_tower",
+          "floorId": "f_01"
+        },
+        "floorNumber": 1,
+        "status": "available",
+        "statusUpdatedAt": "2026-10-01T08:00:00Z",
+        "price": {
+          "amount": 6350000,
+          "currency": "ILS"
+        },
+        "priceUpdatedAt": "2026-10-01T08:00:00Z",
+        "features": {
+          "orientation": [
+            "west",
+            "north"
+          ],
+          "view": "garden",
+          "tags": [
+            "highCeilings"
+          ]
+        },
+        "externalIds": {
+          "erp": "RC-0101"
+        }
+      },
+      {
+        "id": "u_roth_1502",
+        "unitNumber": "1502",
+        "links": {
+          "modelId": "model_roth_2br",
+          "buildingId": "bldg_glass_tower",
+          "floorId": "f_15"
+        },
+        "floorNumber": 15,
+        "status": "reserved",
+        "statusUpdatedAt": "2026-10-18T14:20:00Z",
+        "price": {
+          "amount": 9600000,
+          "currency": "ILS"
+        },
+        "specs": {
+          "rooms": 3.5,
+          "interiorAreaSqm": 93
+        },
+        "features": {
+          "orientation": [
+            "south",
+            "east"
+          ],
+          "view": "city",
+          "tags": [
+            "premiumFinish"
+          ]
+        },
+        "reservation": {
+          "until": "2026-11-01T00:00:00Z",
+          "reference": "CRM-88213"
+        },
+        "externalIds": {
+          "erp": "RC-1502",
+          "crm": "a0B5f000001AbCd"
+        }
+      },
+      {
+        "id": "u_roth_1503",
+        "unitNumber": "1503",
+        "links": {
+          "modelId": "model_roth_2br",
+          "buildingId": "bldg_glass_tower",
+          "floorId": "f_15"
+        },
+        "status": "onHold",
+        "statusUpdatedAt": "2026-10-15T09:00:00Z",
+        "price": {
+          "amount": 9400000,
+          "currency": "ILS"
+        }
+      },
+      {
+        "id": "u_roth_3001",
+        "unitNumber": "3001",
+        "links": {
+          "modelId": "model_roth_ph",
+          "buildingId": "bldg_glass_tower",
+          "floorId": "f_30"
+        },
+        "floorNumber": 30,
+        "status": "sold",
+        "statusUpdatedAt": "2026-09-30T16:45:00Z",
+        "price": {
+          "amount": 22500000,
+          "currency": "ILS"
+        },
+        "features": {
+          "orientation": [
+            "west",
+            "north",
+            "south",
+            "east"
+          ],
+          "view": "sea_full",
+          "tags": [
+            "smartHome",
+            "jacuzzi",
+            "privateElevator"
+          ]
+        },
+        "marketing": {
+          "gallery": [
+            {
+              "url": "https://cdn.reop.io/prj/roth142/units/3001-terrace.jpg",
+              "type": "image"
+            }
+          ]
+        }
+      },
+      {
+        "id": "u_roth_201",
+        "unitNumber": "201",
+        "links": {
+          "modelId": "model_roth_studio",
+          "buildingId": "bldg_glass_tower"
+        },
+        "floorNumber": 2,
+        "status": "available",
+        "price": {
+          "amount": 6200000,
+          "currency": "ILS"
+        }
+      },
+      {
+        "id": "u_roth_202",
+        "unitNumber": "202",
+        "links": {
+          "modelId": "model_roth_studio",
+          "buildingId": "bldg_glass_tower"
+        },
+        "floorNumber": 2,
+        "status": "booked",
+        "statusUpdatedAt": "2026-10-10T11:00:00Z",
+        "reservation": {
+          "reference": "CRM-88190"
+        }
+      }
+    ],
+    "extensions": {
+      "example-vendor": {
+        "campaignId": "autumn-2026"
+      }
+    }
+  },
+  "developer": {
+    "id": "dev_tlv_urban_01",
+    "name": {
+      "en": "Tel Aviv Urban Heights",
+      "he": "גובה אורבני תל אביב"
+    },
+    "description": {
+      "en": "A premier developer specializing in Bauhaus-preservation luxury residences.",
+      "he": "יזם מוביל המתמחה במגורי יוקרה ושימור באוהאוס."
+    },
+    "companyDetails": {
+      "legalName": {
+        "en": "TLV Urban Heights Ltd.",
+        "he": "טי.אל.וי אורבן הייטס בע\"מ"
+      },
+      "companyId": "515998877",
+      "vatId": "IL-515998877"
+    },
+    "history": {
+      "yearsExperience": 15,
+      "projectsDelivered": 8,
+      "unitsSold": 1200
+    },
+    "contact": {
+      "email": "corporate@tlv-urban.example",
+      "phone": "+97235559999",
+      "whatsapp": "+972509998888",
+      "telegram": "tlvurban",
+      "website": "https://tlv-urban.example"
+    },
+    "location": {
+      "address": {
+        "en": "Rothschild Blvd 10",
+        "he": "שדרות רוטשילד 10"
+      },
+      "city": {
+        "en": "Tel Aviv",
+        "he": "תל אביב"
+      },
+      "district": {
+        "en": "Tel Aviv District",
+        "he": "מחוז תל אביב"
+      },
+      "postalCode": "6688100",
+      "countryCode": "IL",
+      "coordinates": {
+        "lat": 32.063,
+        "lng": 34.77
+      }
+    },
+    "marketing": {
+      "logo": {
+        "url": "https://cdn.reop.io/dev/tlv-urban/logo.png",
+        "type": "image",
+        "alt": {
+          "en": "Tel Aviv Urban Heights",
+          "he": "גובה אורבני תל אביב"
+        }
+      },
+      "website": "https://tlv-urban.example",
+      "social": {
+        "linkedin": "https://linkedin.com/company/tlv-urban",
+        "facebook": "https://facebook.com/tlvurban",
+        "instagram": "https://instagram.com/tlv_urban",
+        "telegram": "https://t.me/tlvurban"
+      },
+      "documents": [
+        {
+          "url": "https://cdn.reop.io/dev/tlv-urban/company-profile.pdf",
+          "type": "document",
+          "format": "pdf",
+          "mimeType": "application/pdf",
+          "fileName": "tlv-urban-profile.pdf",
+          "role": "other",
+          "title": {
+            "en": "Company profile"
+          }
+        }
+      ]
+    }
+  }
+}

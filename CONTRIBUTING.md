@@ -1,29 +1,36 @@
-# Contributing to the REOP Protocol
+# Contributing to the REOP protocol
 
-Thank you for your interest in contributing to the Real Estate Open Protocol (REOP). As an open standard, its success depends on industry input.
+Thank you for your interest in the Real Estate Open Protocol. As an open standard its value comes from industry input; its usefulness comes from stability. Both matter.
 
-[cite_start]Our primary goal is **Clarity and Stability**[cite: 14]. [cite_start]We use [Semantic Versioning (SemVer)] to maintain clear upgrade paths[cite: 9].
+## Principles
 
-## 💡 How to Propose Changes
+- **Stability first.** Within a major version every change is backward compatible: new members are optional, constraints only loosen, nothing is removed or renamed. Removals happen only in a major release and only after a deprecation period.
+- **One canonical contract per version**: `schema/<version>/reop.schema.json`. The OpenAPI document is generated from it (`npm run build:openapi`); never edit the generated YAML by hand.
+- **Vocabularies over hard-coded enums** where values grow (amenities, interests, document roles, experience types and providers, payment phases). Closed enums stay closed (project types, states, costs, unit statuses, media types, views, orientations).
+- **Evidence.** A proposal names the real-world data problem it solves (a market, a document type, an integration) and shows an example document.
 
-All proposed changes must be submitted via the **GitHub Discussions** feature before opening a Pull Request.
+## How to propose a change
 
-### 1. Protocol Stability (Important)
+1. Open a GitHub **Issue** using the "Protocol proposal" shape: problem, proposed members or vocabulary values, example document, affected consumers, compatibility (additive / deprecation / major).
+2. Discuss until maintainers and contributors agree on the concept.
+3. Open a pull request against `main` that changes, as one unit:
+   - the current schema (or, for a new version, a new `schema/<version>/` folder),
+   - the generated OpenAPI document (`npm run build:openapi`),
+   - vocabularies if values were added,
+   - examples (and a must-fail case under `examples/<version>/invalid/` when a constraint was added),
+   - `CHANGELOG.md`, and `migrations/` for a new version,
+   - `versions.json` for a new version.
+4. CI must be green: `npm run validate`, `node tools/build-openapi.mjs --check`, `node tools/check-vocabularies.mjs`.
 
-* **Backward Compatibility:** All changes to the current `v1.1.0` branch must be backward compatible (e.g., only adding new, optional fields). [cite_start]Breaking changes will be reserved for future major versions (e.g., `v2.0.0`)[cite: 19].
-* [cite_start]**Deprecation:** If you propose removing an existing field, you must provide a clear deprecation plan (Evolvability)[cite: 19].
+## Releasing a version
 
-### 2. General Guidelines
+1. Create `schema/<version>/reop.schema.json` (copy the previous one, apply the changes, bump `$id` and `protocol.version` const).
+2. Add `specifications/openapi-<version>.template.yaml` and generate `specifications/reop-<version>.yaml`.
+3. Regenerate vocabularies with the new `protocolVersion`; add examples under `examples/<version>/`.
+4. Write `migrations/<previous>-to-<version>.md` (upgrade rules, consumer and producer checklists) and the changelog entry.
+5. Add the version to `versions.json` (`status: current`, previous becomes `supported`).
+6. Tag `v<version>-rc.N` while implementations test it; tag `v<version>` and publish a GitHub Release when it is final; set `released` in `versions.json`.
 
-* [cite_start]**Scope:** Ensure your proposal is within the current scope (Residential, Investment, Vacation Properties)[cite: 50].
-* **Clarity:** Provide a clear use case for why the new field or structure is necessary, referencing real-world data problems (e.g., "We need this for regulatory compliance in Country X").
+## Scope
 
-### 3. Process Checklist
-
-1.  **Discussion:** Start a new thread in the **Discussions** tab under the **"Protocol Proposals"** category.
-2.  **Consensus:** Gain initial community and maintainer consensus on the concept.
-3.  **Pull Request (Final Step):** Once approved in principle, fork the repository and submit a Pull Request (PR) against the primary `main` branch.
-    * Your PR should only modify files within the `/specifications` folder.
-    * Please ensure the YAML remains valid.
-
-We look forward to collaborating with you to define the future of real estate data!
+Residential new developments (for sale and investment), their developers, buildings, unit types, units and availability. Commercial real estate and rentals are candidates for a future major version; proposals are welcome in Issues.

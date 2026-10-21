@@ -1,0 +1,569 @@
+{
+  "name": "interests",
+  "protocolVersion": "1.4.0",
+  "version": "2026-09-30",
+  "description": "Point-of-interest types (InterestEnum of 1.3.0, unchanged). Recommended values; other types are allowed.",
+  "closed": false,
+  "items": [
+    {
+      "key": "school",
+      "labels": {
+        "en": "School",
+        "he": "בית ספר"
+      }
+    },
+    {
+      "key": "kindergarten",
+      "labels": {
+        "en": "Kindergarten",
+        "he": "גן ילדים"
+      }
+    },
+    {
+      "key": "nursery",
+      "labels": {
+        "en": "Nursery",
+        "he": "מעון"
+      }
+    },
+    {
+      "key": "university",
+      "labels": {
+        "en": "University",
+        "he": "אוניברסיטה"
+      }
+    },
+    {
+      "key": "college",
+      "labels": {
+        "en": "College",
+        "he": "מכללה"
+      }
+    },
+    {
+      "key": "library",
+      "labels": {
+        "en": "Library",
+        "he": "ספרייה"
+      }
+    },
+    {
+      "key": "busStation",
+      "labels": {
+        "en": "Bus Station",
+        "he": "תחנת אוטובוס"
+      }
+    },
+    {
+      "key": "trainStation",
+      "labels": {
+        "en": "Train Station",
+        "he": "תחנת רכבת"
+      }
+    },
+    {
+      "key": "subwayStation",
+      "labels": {
+        "en": "Subway Station",
+        "he": "תחנת מטרו"
+      }
+    },
+    {
+      "key": "tramStation",
+      "labels": {
+        "en": "Tram Station",
+        "he": "תחנת טראם"
+      }
+    },
+    {
+      "key": "lightRailStation",
+      "labels": {
+        "en": "Light Rail Station",
+        "he": "תחנת רכבת קלה"
+      }
+    },
+    {
+      "key": "airport",
+      "labels": {
+        "en": "Airport",
+        "he": "שדה תעופה"
+      }
+    },
+    {
+      "key": "highwayAccess",
+      "labels": {
+        "en": "Highway Access",
+        "he": "גישה לכביש מהיר"
+      }
+    },
+    {
+      "key": "taxiStand",
+      "labels": {
+        "en": "Taxi Stand",
+        "he": "תחנת מוניות"
+      }
+    },
+    {
+      "key": "bikeShare",
+      "labels": {
+        "en": "Bike Share",
+        "he": "שיתוף אופניים"
+      }
+    },
+    {
+      "key": "ferryTerminal",
+      "labels": {
+        "en": "Ferry Terminal",
+        "he": "מסוף מעבורת"
+      }
+    },
+    {
+      "key": "hospital",
+      "labels": {
+        "en": "Hospital",
+        "he": "בית חולים"
+      }
+    },
+    {
+      "key": "clinic",
+      "labels": {
+        "en": "Clinic",
+        "he": "מרפאה"
+      }
+    },
+    {
+      "key": "pharmacy",
+      "labels": {
+        "en": "Pharmacy",
+        "he": "בית מרקחת"
+      }
+    },
+    {
+      "key": "dentist",
+      "labels": {
+        "en": "Dentist",
+        "he": "רופא שיניים"
+      }
+    },
+    {
+      "key": "veterinarian",
+      "labels": {
+        "en": "Veterinarian",
+        "he": "וטרינר"
+      }
+    },
+    {
+      "key": "supermarket",
+      "labels": {
+        "en": "Supermarket",
+        "he": "סופרמרקט"
+      }
+    },
+    {
+      "key": "groceryStore",
+      "labels": {
+        "en": "Grocery Store",
+        "he": "מכולת"
+      }
+    },
+    {
+      "key": "convenienceStore",
+      "labels": {
+        "en": "Convenience Store",
+        "he": "חנות נוחות"
+      }
+    },
+    {
+      "key": "bakery",
+      "labels": {
+        "en": "Bakery",
+        "he": "מאפייה"
+      }
+    },
+    {
+      "key": "market",
+      "labels": {
+        "en": "Market",
+        "he": "שוק"
+      }
+    },
+    {
+      "key": "mall",
+      "labels": {
+        "en": "Mall",
+        "he": "קניון"
+      }
+    },
+    {
+      "key": "shoppingCenter",
+      "labels": {
+        "en": "Shopping Center",
+        "he": "מרכז קניות"
+      }
+    },
+    {
+      "key": "departmentStore",
+      "labels": {
+        "en": "Department Store",
+        "he": "כלבו"
+      }
+    },
+    {
+      "key": "outlet",
+      "labels": {
+        "en": "Outlet",
+        "he": "אאוטלט"
+      }
+    },
+    {
+      "key": "furnitureStore",
+      "labels": {
+        "en": "Furniture Store",
+        "he": "חנות רהיטים"
+      }
+    },
+    {
+      "key": "hardwareStore",
+      "labels": {
+        "en": "Hardware Store",
+        "he": "חנות חומרי בניין"
+      }
+    },
+    {
+      "key": "bank",
+      "labels": {
+        "en": "Bank",
+        "he": "בנק"
+      }
+    },
+    {
+      "key": "atm",
+      "labels": {
+        "en": "ATM",
+        "he": "כספומט"
+      }
+    },
+    {
+      "key": "postOffice",
+      "labels": {
+        "en": "Post Office",
+        "he": "דואר"
+      }
+    },
+    {
+      "key": "policeStation",
+      "labels": {
+        "en": "Police Station",
+        "he": "תחנת משטרה"
+      }
+    },
+    {
+      "key": "fireStation",
+      "labels": {
+        "en": "Fire Station",
+        "he": "תחנת כיבוי"
+      }
+    },
+    {
+      "key": "cityHall",
+      "labels": {
+        "en": "City Hall",
+        "he": "עירייה"
+      }
+    },
+    {
+      "key": "embassy",
+      "labels": {
+        "en": "Embassy",
+        "he": "שגרירות"
+      }
+    },
+    {
+      "key": "synagogue",
+      "labels": {
+        "en": "Synagogue",
+        "he": "בית כנסת"
+      }
+    },
+    {
+      "key": "church",
+      "labels": {
+        "en": "Church",
+        "he": "כנסייה"
+      }
+    },
+    {
+      "key": "mosque",
+      "labels": {
+        "en": "Mosque",
+        "he": "מסגד"
+      }
+    },
+    {
+      "key": "temple",
+      "labels": {
+        "en": "Temple",
+        "he": "מקדש"
+      }
+    },
+    {
+      "key": "religiousCenter",
+      "labels": {
+        "en": "Religious Center",
+        "he": "מרכז דתי"
+      }
+    },
+    {
+      "key": "park",
+      "labels": {
+        "en": "Park",
+        "he": "פארק"
+      }
+    },
+    {
+      "key": "dogPark",
+      "labels": {
+        "en": "Dog Park",
+        "he": "פארק כלבים"
+      }
+    },
+    {
+      "key": "playground",
+      "labels": {
+        "en": "Playground",
+        "he": "גן משחקים"
+      }
+    },
+    {
+      "key": "natureReserve",
+      "labels": {
+        "en": "Nature Reserve",
+        "he": "שמורת טבע"
+      }
+    },
+    {
+      "key": "beach",
+      "labels": {
+        "en": "Beach",
+        "he": "חוף"
+      }
+    },
+    {
+      "key": "lake",
+      "labels": {
+        "en": "Lake",
+        "he": "אגם"
+      }
+    },
+    {
+      "key": "river",
+      "labels": {
+        "en": "River",
+        "he": "נהר"
+      }
+    },
+    {
+      "key": "marina",
+      "labels": {
+        "en": "Marina",
+        "he": "מרינה"
+      }
+    },
+    {
+      "key": "forest",
+      "labels": {
+        "en": "Forest",
+        "he": "יער"
+      }
+    },
+    {
+      "key": "mountain",
+      "labels": {
+        "en": "Mountain",
+        "he": "הר"
+      }
+    },
+    {
+      "key": "gym",
+      "labels": {
+        "en": "Gym",
+        "he": "חדר כושר"
+      }
+    },
+    {
+      "key": "sportsCenter",
+      "labels": {
+        "en": "Sports Center",
+        "he": "מרכז ספורט"
+      }
+    },
+    {
+      "key": "swimmingPool",
+      "labels": {
+        "en": "Swimming Pool",
+        "he": "בריכת שחייה"
+      }
+    },
+    {
+      "key": "stadium",
+      "labels": {
+        "en": "Stadium",
+        "he": "אצטדיון"
+      }
+    },
+    {
+      "key": "golfCourse",
+      "labels": {
+        "en": "Golf Course",
+        "he": "מגרש גולף"
+      }
+    },
+    {
+      "key": "skatePark",
+      "labels": {
+        "en": "Skate Park",
+        "he": "פארק סקייט"
+      }
+    },
+    {
+      "key": "restaurant",
+      "labels": {
+        "en": "Restaurant",
+        "he": "מסעדה"
+      }
+    },
+    {
+      "key": "cafe",
+      "labels": {
+        "en": "Cafe",
+        "he": "בית קפה"
+      }
+    },
+    {
+      "key": "bar",
+      "labels": {
+        "en": "Bar",
+        "he": "בר"
+      }
+    },
+    {
+      "key": "pub",
+      "labels": {
+        "en": "Pub",
+        "he": "פאב"
+      }
+    },
+    {
+      "key": "coffeeShop",
+      "labels": {
+        "en": "Coffee Shop",
+        "he": "בית קפה"
+      }
+    },
+    {
+      "key": "fastFood",
+      "labels": {
+        "en": "Fast Food",
+        "he": "מזון מהיר"
+      }
+    },
+    {
+      "key": "foodCourt",
+      "labels": {
+        "en": "Food Court",
+        "he": "מתחם מזון"
+      }
+    },
+    {
+      "key": "cinema",
+      "labels": {
+        "en": "Cinema",
+        "he": "קולנוע"
+      }
+    },
+    {
+      "key": "theater",
+      "labels": {
+        "en": "Theater",
+        "he": "תיאטרון"
+      }
+    },
+    {
+      "key": "museum",
+      "labels": {
+        "en": "Museum",
+        "he": "מוזיאון"
+      }
+    },
+    {
+      "key": "artGallery",
+      "labels": {
+        "en": "Art Gallery",
+        "he": "גלריה לאמנות"
+      }
+    },
+    {
+      "key": "concertHall",
+      "labels": {
+        "en": "Concert Hall",
+        "he": "אולם קונצרטים"
+      }
+    },
+    {
+      "key": "operaHouse",
+      "labels": {
+        "en": "Opera House",
+        "he": "בית אופרה"
+      }
+    },
+    {
+      "key": "zoo",
+      "labels": {
+        "en": "Zoo",
+        "he": "גן חיות"
+      }
+    },
+    {
+      "key": "aquarium",
+      "labels": {
+        "en": "Aquarium",
+        "he": "אקווריום"
+      }
+    },
+    {
+      "key": "themePark",
+      "labels": {
+        "en": "Theme Park",
+        "he": "פארק שעשועים"
+      }
+    },
+    {
+      "key": "bowlingAlley",
+      "labels": {
+        "en": "Bowling Alley",
+        "he": "באולינג"
+      }
+    },
+    {
+      "key": "casino",
+      "labels": {
+        "en": "Casino",
+        "he": "קזינו"
+      }
+    },
+    {
+      "key": "nightClub",
+      "labels": {
+        "en": "Night Club",
+        "he": "מועדון לילה"
+      }
+    },
+    {
+      "key": "hotel",
+      "labels": {
+        "en": "Hotel",
+        "he": "מלון"
+      }
+    }
+  ]
+}

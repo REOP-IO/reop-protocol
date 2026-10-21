@@ -1,0 +1,19 @@
+{
+  "name": "reop-protocol",
+  "version": "1.4.0",
+  "private": true,
+  "description": "Real Estate Open Protocol (REOP): schemas, vocabularies, examples and validation tooling.",
+  "type": "module",
+  "scripts": {
+    "validate": "node tools/validate.mjs",
+    "build:openapi": "node tools/build-openapi.mjs",
+    "check": "npm run validate && node tools/build-openapi.mjs --check"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "yaml": "^2.6.1"
+  },
+  "engines": { "node": ">=20" },
+  "license": "MIT"
+}
