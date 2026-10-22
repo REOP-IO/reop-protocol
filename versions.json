@@ -6,7 +6,7 @@
     {
       "version": "1.4.0",
       "status": "current",
-      "released": null,
+      "released": "2026-10-22",
       "schema": "schema/1.4.0/reop.schema.json",
       "schemaDialect": "https://json-schema.org/draft/2020-12/schema",
       "openapi": "specifications/reop-1.4.0.yaml",

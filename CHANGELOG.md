@@ -2,7 +2,7 @@
 
 Newest first. One section per release. Semantic Versioning: a minor release only adds optional members, loosens constraints or deprecates; a major release may remove or rename. The machine-readable index is `versions.json`.
 
-## 1.4.0 (unreleased, release candidate)
+## 1.4.0 (2026-10-22)
 
 Consolidation release. Every 1.3.0 structure, enum and name is retained; the changes below are additions, loosenings and deprecations. Migration guide: `migrations/1.3.0-to-1.4.0.md`.
 
