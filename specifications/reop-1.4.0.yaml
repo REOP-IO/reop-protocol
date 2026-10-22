@@ -230,8 +230,8 @@ components:
       type: string
       minLength: 1
       maxLength: 128
-      pattern: ^[A-Za-z0-9][A-Za-z0-9_.:-]*$
-      description: "Opaque identifier, unique within the document per entity type and stable across revisions of the same project. Recommended prefixes: dev_, prj_, um_, bld_, flr_, unit_, poi_."
+      pattern: ^\S(.*\S)?$
+      description: "Opaque identifier, unique within the document per entity type and stable across revisions of the same project: any non-empty text without leading or trailing whitespace (producers commonly use their own unit codes, in any script). Recommended prefixes for generated ids: dev_, prj_, um_, bld_, flr_, unit_, poi_."
     Url:
       type: string
       format: uri
