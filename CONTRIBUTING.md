@@ -11,7 +11,7 @@ Thank you for your interest in the Real Estate Open Protocol. As an open standar
 
 ## How to propose a change
 
-1. Open a GitHub **Issue** using the "Protocol proposal" shape: problem, proposed members or vocabulary values, example document, affected consumers, compatibility (additive / deprecation / major).
+1. Open a GitHub **Issue** (or a Discussion for an open question) using the "Protocol proposal" shape: problem, proposed members or vocabulary values, example document, affected consumers, compatibility (additive / deprecation / major).
 2. Discuss until maintainers and contributors agree on the concept.
 3. Open a pull request against `main` that changes, as one unit:
    - the current schema (or, for a new version, a new `schema/<version>/` folder),
@@ -30,6 +30,7 @@ Thank you for your interest in the Real Estate Open Protocol. As an open standar
 4. Write `migrations/<previous>-to-<version>.md` (upgrade rules, consumer and producer checklists) and the changelog entry.
 5. Add the version to `versions.json` (`status: current`, previous becomes `supported`).
 6. Tag `v<version>-rc.N` while implementations test it; tag `v<version>` and publish a GitHub Release when it is final; set `released` in `versions.json`.
+7. Publish: `tools/release-assets.sh v<version>` attaches the schema, OpenAPI, examples and vocabularies to the Release; `tools/github-meta.sh` updates the repository description ("Current version: …") and topics; update `REOP-IO/.github/profile/README.md` (org profile) and the website: in `REOP-IO/reop-site` run `npm run sync -- v<version>` (publishes `https://reop.io/schema/<version>/…`, the vocabularies and the api-docs OpenAPI), refresh the copy, `npm run check`, tag `site-v<version>-1`, deploy. The REOP app vendors the tag with `npm run reop:vendor -- v<version>` (`docs/REOP-RELEASE-RUNBOOK.md` in `REOP-IO/reop-app`). The published schema URL of a released version never changes.
 
 ## Scope
 
