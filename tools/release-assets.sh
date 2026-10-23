@@ -5,7 +5,7 @@
 #   tools/release-assets.sh v1.4.0
 #
 # Uploads: reop.schema.json, reop-<v>.yaml, reop-<v>-examples.zip, reop-<v>-vocabularies.zip,
-# versions.json. Requires the gh CLI authenticated for REOP-IO/reop-protocol and `zip`.
+# versions.json. Requires the gh CLI authenticated for REOP-IO/reop-protocol and `zip` or bsdtar.
 set -euo pipefail
 
 TAG="${1:?usage: tools/release-assets.sh v<version>}"
@@ -23,8 +23,10 @@ test -d "examples/$VERSION" || { echo "no examples for $VERSION"; exit 1; }
 cp "schema/$VERSION/reop.schema.json" "$WORK/reop.schema.json"
 cp "specifications/reop-$VERSION.yaml" "$WORK/reop-$VERSION.yaml"
 cp versions.json "$WORK/versions.json"
-( cd examples && zip -qr "$WORK/reop-$VERSION-examples.zip" "$VERSION" )
-( cd vocabularies && zip -qr "$WORK/reop-$VERSION-vocabularies.zip" . )
+# zip where available (Linux, macOS); bsdtar (Windows Git Bash) can write zip archives with -a.
+mkzip() { local out="$1" dir="$2" entry="$3"; if command -v zip >/dev/null; then ( cd "$dir" && zip -qr "$out" "$entry" ); else ( cd "$dir" && tar -a -cf "$out" "$entry" ); fi; }
+mkzip "$WORK/reop-$VERSION-examples.zip" examples "$VERSION"
+mkzip "$WORK/reop-$VERSION-vocabularies.zip" . vocabularies
 ( cd "$WORK" && sha256sum reop.schema.json "reop-$VERSION.yaml" versions.json "reop-$VERSION-examples.zip" "reop-$VERSION-vocabularies.zip" > "SHA256SUMS-$VERSION.txt" )
 
 gh release upload "$TAG" --repo "$REPO" --clobber \

@@ -9,7 +9,8 @@ set -euo pipefail
 
 REPO="REOP-IO/reop-protocol"
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-CURRENT="$(node -e "console.log(JSON.parse(require('fs').readFileSync('$ROOT/versions.json','utf8')).current)")"
+CURRENT="$(grep -m1 '"current"' "$ROOT/versions.json" | sed -E 's/.*"current": *"([^"]+)".*//')"
+test -n "$CURRENT" || { echo "could not read current from versions.json"; exit 1; }
 
 DESCRIPTION="The Real Estate Open Protocol (REOP): an open, vendor-neutral JSON standard for new-development real estate data, from developer systems to marketplaces and AI agents. Current version: $CURRENT."
 
