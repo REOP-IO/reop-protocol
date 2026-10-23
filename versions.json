@@ -1,5 +1,5 @@
 {
-  "$comment": "Machine-readable index of REOP releases. Consumers, the reop.io site and the REOP app CI read this file. `current` is the version new documents MUST declare; `supported` versions are still accepted by readers of the same major; `deprecated` versions have a published migration path.",
+  "$comment": "Machine-readable index of REOP releases. Consumers, the reop.io site (tools/sync-protocol.mjs in REOP-IO/reop-site) and the REOP app CI (reop:vendor) read this file. `releaseUrl` is the GitHub Release of a version (absent for versions that pre-date GitHub Releases). `current` is the version new documents MUST declare; `supported` versions are still accepted by readers of the same major; `deprecated` versions have a published migration path.",
   "current": "1.4.0",
   "schemaBaseUrl": "https://reop.io/schema/",
   "versions": [
@@ -7,6 +7,7 @@
       "version": "1.4.0",
       "status": "current",
       "released": "2026-10-22",
+      "releaseUrl": "https://github.com/REOP-IO/reop-protocol/releases/tag/v1.4.0",
       "schema": "schema/1.4.0/reop.schema.json",
       "schemaDialect": "https://json-schema.org/draft/2020-12/schema",
       "openapi": "specifications/reop-1.4.0.yaml",

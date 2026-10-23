@@ -7,7 +7,7 @@
   "scripts": {
     "validate": "node tools/validate.mjs",
     "build:openapi": "node tools/build-openapi.mjs",
-    "check": "npm run validate && node tools/build-openapi.mjs --check"
+    "check": "npm run validate && node tools/build-openapi.mjs --check && node tools/check-vocabularies.mjs"
   },
   "devDependencies": {
     "ajv": "^8.17.1",
