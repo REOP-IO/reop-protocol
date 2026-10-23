@@ -9,8 +9,9 @@ set -euo pipefail
 
 REPO="REOP-IO/reop-protocol"
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-CURRENT="$(grep -m1 '"current"' "$ROOT/versions.json" | sed -E 's/.*"current": *"([^"]+)".*//' | tr -d '
-')"
+# grep/sed instead of node so the script works from Git Bash on Windows too; tr drops the CR of a
+# CRLF checkout.
+CURRENT="$(grep -m1 '"current"' "$ROOT/versions.json" | sed -E 's/.*"current": *"([^"]+)".*/\1/' | tr -d '\r\n')"
 test -n "$CURRENT" || { echo "could not read current from versions.json"; exit 1; }
 
 DESCRIPTION="The Real Estate Open Protocol (REOP): an open, vendor-neutral JSON standard for new-development real estate data, from developer systems to marketplaces and AI agents. Current version: $CURRENT."
