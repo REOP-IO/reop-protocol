@@ -2,7 +2,7 @@
 
 Newest first. One section per release. Semantic Versioning: a minor release only adds optional members, loosens constraints or deprecates; a major release may remove or rename. The machine-readable index is `versions.json`.
 
-## 1.4.0 (unreleased, release candidate)
+## 1.4.0 (2026-10-22)
 
 Consolidation release. Every 1.3.0 structure, enum and name is retained; the changes below are additions, loosenings and deprecations. Migration guide: `migrations/1.3.0-to-1.4.0.md`.
 
@@ -14,6 +14,7 @@ Consolidation release. Every 1.3.0 structure, enum and name is retained; the cha
 - One canonical JSON Schema per version (`schema/<version>/reop.schema.json`, draft 2020-12); the OpenAPI document is generated from it. `versions.json` indexes releases; `vocabularies/*.json` publish the controlled values with labels.
 
 ### Shared objects
+- `Id` is any non-empty text without leading or trailing whitespace (1.3.0 had no constraint; rc.1 limited ids to ASCII, which rejected producers' own unit codes such as `B+`, `C1/C2` or Hebrew unit names). Prefixes stay a recommendation for generated ids.
 - New `MediaAsset` (url, type, mimeType, fileName, title, alt, caption, width, height, sizeBytes, previewUrl, role), `FileAsset` (+ format), `ImageAsset`. The 1.3.0 gallery item `{ type, url }` is a valid `MediaAsset`.
 - New `Experience` (type, provider, url, embed, previewUrl, floors[], providerData) for virtual tours, dollhouses, 3D models, 360 video, AR. Vendor neutral; `3destate` and `matterport` listed as known providers.
 - New `PriceRange { min, max }`, `UnitSpecs`, `UnitFeatures`, `GreenCertification`, `Reservation`, `UnitLinks`.
